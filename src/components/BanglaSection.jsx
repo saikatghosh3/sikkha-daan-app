@@ -1,4 +1,4 @@
-import FlashCard from './Flashcard'
+import FlashCard from './FlashCard'
 
 import  image1 from '../assets/bangla/ajogor.png'
 import  image2 from '../assets/bangla/aam.png'
