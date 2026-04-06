@@ -117,7 +117,9 @@
 .flashcard {
   width: 100%;
   max-width: 500px;
-  height: 250px;
+  /* height: 250px; */
+  aspect-ratio: 2 / 1; 
+  height: auto;
   background: white;
   border-radius: 20px;
   border: 4px solid #3498db;
@@ -171,7 +173,6 @@
   height: 100%;
   object-fit: cover;
 }
-
 
 /* TEXT */
 
@@ -280,10 +281,7 @@
 
 @media (max-width: 768px) {
 
-  .flashcard {
-    height: 280px;
-  }
-
+ 
   .flashcard-text {
     font-size: 3.5em;
   }
@@ -292,9 +290,7 @@
 
 @media (max-width: 480px) {
 
-  .flashcard {
-    height: 250px;
-  }
+ 
 
   .flashcard-text {
     font-size: 3em;
