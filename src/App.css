@@ -64,7 +64,7 @@
 
   background-image: 
     linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-    url("./assets/Education.jpg");
+    url("img/Education.jpg");
 
   background-size: cover;
   background-position: center;
@@ -180,11 +180,6 @@
   font-size: 5em;
   font-weight: 700;
   line-height: 1;
-  text-align: center;
-}
-
-.flashcard-hint {
-  position: absolute;
   bottom: 2rem;
   font-size: 0.9em;
   color: #95a5a6;
@@ -277,6 +272,191 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+
+/* Rhymes section */
+.flashcard-text {
+  margin-top: 10px;
+  font-size: 18px;
+  line-height: 1.6;
+  white-space: pre-line; /* 🔥 important for \n */
+}
+
+.flashcard-heading {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+
+
+/* rhymes section css start  */
+/* FULL SCREEN STORY VIEW */
+
+.story-container {
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* dark overlay (important) */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55); /* opacity control */
+}
+
+/* content box */
+.story-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  max-width: 600px;
+  padding: 20px;
+}
+
+/* title */
+.story-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+/* text */
+.story-text {
+  font-size: 22px;
+  line-height: 1.8;
+  white-space: pre-line;
+  margin-bottom: 30px;
+}
+
+/* buttons */
+.story-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.story-controls button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 12px;
+  background: #6C5CE7;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.story-controls button:hover {
+  background: #4834d4;
+  transform: scale(1.05);
+}
+
+/* spacing between Bangla & English */
+.section-gap {
+  height:4rem;
+  background: transparent;
+}
+
+.section-title {
+  font-size: 26px;
+  margin-bottom: 5rem;
+  color: #ffeaa7;
+}
+/* rhymes section css end   */
+
+/* multiplication table css  */
+
+/* 🔥 Multiplication Table - Modern Kids UI */
+
+.multiplication-container {
+  padding: 20px;
+}
+
+/* Title */
+.multiplication-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* Grid */
+.multiplication-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+/* Card */
+.table-card {
+  background: linear-gradient(135deg, #6C5CE7, #a29bfe);
+  border-radius: 20px;
+  padding: 18px;
+  color: white;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glow effect */
+.table-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent);
+  transform: rotate(25deg);
+}
+
+/* Hover animation */
+.table-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+/* Title inside card */
+.table-title {
+  text-align: center;
+  margin-bottom: 12px;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+/* List */
+.table-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Each row */
+.table-card li {
+  background: rgba(255,255,255,0.15);
+  margin: 5px 0;
+  padding: 6px 10px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+/* Hover row */
+.table-card li:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.03);
+}
+
 /* MOBILE */
 
 @media (max-width: 768px) {
@@ -297,3 +477,4 @@
   }
 
 }
+

@@ -19,6 +19,18 @@ export default function Navigation({ activeSection, setActiveSection }) {
       >
         English ABC
       </button>
+      <button
+  className={`nav-button ${activeSection === 'rhymes' ? 'active' : ''}`}
+  onClick={() => setActiveSection('rhymes')}
+>
+  Rhymes 🎵
+</button>
+<button
+  className={`nav-button ${activeSection === 'multiplication' ? 'active' : ''}`}
+  onClick={() => setActiveSection('multiplication')}
+>
+  নামতা ✖️
+</button>
     </nav>
   )
 }

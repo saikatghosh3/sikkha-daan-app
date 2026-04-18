@@ -33,7 +33,8 @@ export default function FlashCard({ items, title, categoryColor }) {
       </div>
 
       {/* Flashcard */}
-      <div className="flashcard" style={{ borderColor: categoryColor }}>
+      {/* old code satrt */}
+      {/* <div className="flashcard" style={{ borderColor: categoryColor }}>
         <div className="flashcard-character">
           {currentItem.character}
         </div>
@@ -45,7 +46,45 @@ export default function FlashCard({ items, title, categoryColor }) {
             className="flashcard-image"
           />
         </div>
-      </div>
+      </div> */}
+      {/* old code end  */}
+      {/* new code start */}
+      <div className="flashcard" style={{ borderColor: categoryColor }}>
+  
+  {/* Title (NEW) */}
+  {currentItem.title && (
+    <h3 className="flashcard-heading">
+      {currentItem.title}
+    </h3>
+  )}
+
+  {/* Character (existing) */}
+  {currentItem.character && (
+    <div className="flashcard-character">
+      {currentItem.character}
+    </div>
+  )}
+
+  {/* Image (existing) */}
+  {currentItem.image && (
+    <div className="flashcard-image-container">
+      <img
+        src={currentItem.image}
+        alt={currentItem.title || currentItem.character}
+        className="flashcard-image"
+      />
+    </div>
+  )}
+
+  {/* Description / Text (NEW 🔥) */}
+  {currentItem.text && (
+    <p className="flashcard-text">
+      {currentItem.text}
+    </p>
+  )}
+
+</div>
+      {/* new code end  */}
 
       {/* Controls */}
       <div className="flashcard-controls">

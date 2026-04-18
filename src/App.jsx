@@ -4,6 +4,8 @@ import Navigation from './components/Navigation'
 import BanglaSection from './components/BanglaSection'
 import NumbersSection from './components/NumbersSection'
 import EnglishSection from './components/EnglishSection'
+import RhymesSection from './components/RhymesSection'
+import MultiplicationSection from './components/MultiplicationSection'
 
 function App() {
   const [activeSection, setActiveSection] = useState('bangla')
@@ -21,6 +23,8 @@ function App() {
         {activeSection === 'bangla' && <BanglaSection />}
         {activeSection === 'numbers' && <NumbersSection />}
         {activeSection === 'english' && <EnglishSection />}
+        {activeSection === 'rhymes' && <RhymesSection />}
+        {activeSection === 'multiplication' && <MultiplicationSection />}
       </main>
     </div>
   )
