@@ -14,8 +14,8 @@ function App() {
   return (
     <div className="app-container">
       <header className="app-header">
-        <h1>Learning Alphabets</h1>
-        <p>Interactive flashcards for children</p>
+        <h1>Little First Steps</h1>
+        <p>Fun with alphabets and nursery rhymes</p>
       </header>
 
       <Navigation activeSection={activeSection} setActiveSection={setActiveSection} />
