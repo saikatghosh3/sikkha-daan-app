@@ -29,10 +29,10 @@ export default function BanglaSection() {
     { character: 'ছ', name: 'ছাতা', image: '/img/bangla/chata.png', description: 'ছাতা (Umbrella)' },
     { character: 'জ', name: 'জাহাজ', image: '/img/bangla/jahaz.png', description: 'জাহাজ (Ship)' },
     { character: 'ঝ', name: 'ঝিনুক', image: '/img/bangla/jhinuk.png', description: 'ঝিনুক (Shell)' },
-    { character: 'ঞ', name: 'পাঞ্জা', image: '/img/bangla/bang.png', description: 'পাঞ্জা (Paw)' },
+    { character: 'ঞ', name: 'পাঞ্জা', image: '/img/bangla/panja.png', description: 'পাঞ্জা (Paw)' },
 
        { character: 'ট', name: 'টমেটো', image: '/img/bangla/tomato.png', description: 'টমেটো (Tomato)' },
-    { character: 'ঠ', name: 'ঠেলা', image: '/img/bangla/thala.png', description: 'ঠেলা (Push cart)' },
+    { character: 'ঠ', name: 'ঠেলা', image: '/img/bangla/thelagari.png', description: 'ঠেলা (Push cart)' },
     { character: 'ড', name: 'ডাল', image: '/img/bangla/dal.png', description: 'ডাল (Branch)' },
     { character: 'ঢ', name: 'ঢাক', image: '/img/bangla/dhak.png', description: 'ঢাক (Drum)' },
     { character: 'ণ', name: 'বাণ', image: '/img/bangla/baan.png', description: 'বাণ (Arrow)' },

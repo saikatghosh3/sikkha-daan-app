@@ -3,17 +3,17 @@ import FlashCard from './FlashCard'
 export default function NumbersSection() {
 
   const banglaNumbers = [
-    { character: '०', name: 'শূন্য', image: '/img/numbers/khalijhuri.png', description: 'খালি ঝুড়ি' },
-    { character: '१', name: 'এক', image: '/img/numbers/ekkolom.png', description: 'একটি কলম' },
-    { character: '२', name: 'দুই', image: '/img/numbers/duibol.png', description: 'দুটি বল' },
-    { character: '३', name: 'তিন', image: '/img/numbers/tinapple.png', description: 'তিনটি আপেল' },
-    { character: '४', name: 'চার', image: '/img/numbers/charaam.png', description: 'চারটি আম' },
-    { character: '५', name: 'পাঁচ', image: '/img/numbers/pachtara.png', description: 'পাচটি তারা' },
-    { character: '६', name: 'ছয়', image: '/img/numbers/choiful.png', description: 'ছয়টি ফুল' },
-    { character: '७', name: 'সাত', image: '/img/numbers/sathprojapoti.png', description: 'সাতটি প্রজাপতি' },
-    { character: '८', name: 'আট', image: '/img/numbers/atpencil.png', description: 'আটটি পেন্সিল' },
-    { character: '९', name: 'নয়', image: '/img/numbers/noikola.png', description: 'নয়টি কলা' },
-    { character: '१०', name: 'দশ', image: '/img/numbers/doshchocolate.png', description: 'দশটি চকলেট' },
+{ character: '০', name: 'শূন্য', image: '/img/numbers/khalijhuri.png', description: 'খালি ঝুড়ি' },
+  { character: '১', name: 'এক', image: '/img/numbers/ekkolom.png', description: 'একটি কলম' },
+  { character: '২', name: 'দুই', image: '/img/numbers/duibol.png', description: 'দুটি বল' },
+  { character: '৩', name: 'তিন', image: '/img/numbers/tinapple.png', description: 'তিনটি আপেল' },
+  { character: '৪', name: 'চার', image: '/img/numbers/charaam.png', description: 'চারটি আম' },
+  { character: '৫', name: 'পাঁচ', image: '/img/numbers/pachtara.png', description: 'পাঁচটি তারা' },
+  { character: '৬', name: 'ছয়', image: '/img/numbers/choiful.png', description: 'ছয়টি ফুল' },
+  { character: '৭', name: 'সাত', image: '/img/numbers/sathprojapoti.png', description: 'সাতটি প্রজাপতি' },
+  { character: '৮', name: 'আট', image: '/img/numbers/atpencil.png', description: 'আটটি পেন্সিল' },
+  { character: '৯', name: 'নয়', image: '/img/numbers/noikola.png', description: 'নয়টি কলা' },
+  { character: '১০', name: 'দশ', image: '/img/numbers/doshchocolate.png', description: 'দশটি চকলেট' },
   ]
 
   const englishNumbers = [
