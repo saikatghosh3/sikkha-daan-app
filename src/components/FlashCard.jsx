@@ -32,23 +32,6 @@ export default function FlashCard({ items, title, categoryColor }) {
         </div>
       </div>
 
-      {/* Flashcard */}
-      {/* old code satrt */}
-      {/* <div className="flashcard" style={{ borderColor: categoryColor }}>
-        <div className="flashcard-character">
-          {currentItem.character}
-        </div>
-
-        <div className="flashcard-image-container">
-          <img
-            src={currentItem.image}
-            alt={currentItem.character}
-            className="flashcard-image"
-          />
-        </div>
-      </div> */}
-      {/* old code end  */}
-      {/* new code start */}
       <div className="flashcard" style={{ borderColor: categoryColor }}>
   
   {/* Title (NEW) */}
@@ -58,14 +41,13 @@ export default function FlashCard({ items, title, categoryColor }) {
     </h3>
   )}
 
-  {/* Character (existing) */}
   {currentItem.character && (
     <div className="flashcard-character">
       {currentItem.character}
     </div>
   )}
 
-  {/* Image (existing) */}
+ 
   {currentItem.image && (
     <div className="flashcard-image-container">
       <img
@@ -76,7 +58,6 @@ export default function FlashCard({ items, title, categoryColor }) {
     </div>
   )}
 
-  {/* Description / Text (NEW 🔥) */}
   {currentItem.text && (
     <p className="flashcard-text">
       {currentItem.text}
@@ -84,9 +65,7 @@ export default function FlashCard({ items, title, categoryColor }) {
   )}
 
 </div>
-      {/* new code end  */}
 
-      {/* Controls */}
       <div className="flashcard-controls">
         <button className="control-button prev-button" onClick={handlePrev}>
           ← Previous
@@ -97,7 +76,6 @@ export default function FlashCard({ items, title, categoryColor }) {
         </button>
       </div>
 
-      {/* Alphabet Selector */}
       <div className="card-items">
         {items.map((item, index) => (
           <div

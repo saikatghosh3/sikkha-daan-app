@@ -290,89 +290,160 @@
 
 
 /* rhymes section css start  */
-/* FULL SCREEN STORY VIEW */
+
+/* =========================
+   FULL SCREEN STORY VIEW
+========================= */
 
 .story-container {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
+
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+
   position: relative;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-/* dark overlay (important) */
+/* dark overlay */
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.55); /* opacity control */
+  background: rgba(0,0,0,0.6);
 }
 
 /* content box */
 .story-content {
   position: relative;
   z-index: 2;
+
   text-align: center;
   color: white;
-  max-width: 600px;
-  padding: 20px;
+
+  width: 100%;
+  max-width: 650px;
+
+  padding: 25px;
+  border-radius: 20px;
+
+  /* glass effect (modern feel) */
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(1px);
+
+  box-sizing: border-box;
 }
 
 /* title */
 .story-title {
-  font-size: 32px;
-  margin-bottom: 20px;
+  font-size: 34px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.section-title{
+  font-size: 20px;
+  color: white;
 }
 
 /* text */
 .story-text {
   font-size: 22px;
-  line-height: 1.8;
+  line-height: 1.7;
   white-space: pre-line;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 /* buttons */
 .story-controls {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 .story-controls button {
   padding: 12px 18px;
   border: none;
   border-radius: 12px;
+
   background: #6C5CE7;
   color: white;
+
   cursor: pointer;
   transition: 0.3s;
+
+  min-width: 120px;
 }
 
 .story-controls button:hover {
   background: #4834d4;
-  transform: scale(1.05);
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* =========================
+   📱 MOBILE (phones)
+========================= */
+@media (max-width: 768px) {
+  story-container{
+    background-size:contain;
+  }
+  .story-content {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .story-title {
+    font-size: 24px;
+  }
+
+  .story-text {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .story-controls button {
+    width: 45%;
+    min-width: unset;
+    font-size: 14px;
+  }
+}
+
+/* =========================
+   📱 SMALL MOBILE
+========================= */
+@media (max-width: 480px) {
+
+  .story-title {
+    font-size: 20px;
+  }
+
+  .story-text {
+    font-size: 16px;
+  }
+
+  .story-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .story-controls button {
+    width: 100%;
+  }
 }
 
 /* spacing between Bangla & English */
-.section-gap {
-  height:4rem;
-  background: transparent;
-}
 
-.section-title {
-  font-size: 26px;
-  margin-bottom: 5rem;
-  color: #ffeaa7;
-}
 /* rhymes section css end   */
 
 /* multiplication table css  */
-
-/* 🔥 Multiplication Table - Modern Kids UI */
 
 .multiplication-container {
   padding: 20px;
@@ -457,24 +528,59 @@
   transform: scale(1.03);
 }
 
-/* MOBILE */
+/* ScrollToTop css  */
+.scroll-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
 
+  width: 54px;
+  height: 54px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, #6C5CE7, #00CEC9);
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+  opacity: 0;
+  transform: translateY(20px) scale(0.8);
+
+  transition: all 0.25s ease;
+
+  z-index: 999;
+}
+
+.scroll-btn.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.scroll-btn:hover {
+  transform: translateY(-4px) scale(1.1);
+}
+
+.scroll-btn:active {
+  transform: scale(0.95);
+}
+
+/* mobile */
 @media (max-width: 768px) {
-
- 
-  .flashcard-text {
-    font-size: 3.5em;
+  .scroll-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+    bottom: 15px;
+    right: 15px;
   }
-
 }
-
-@media (max-width: 480px) {
-
- 
-
-  .flashcard-text {
-    font-size: 3em;
-  }
-
-}
-

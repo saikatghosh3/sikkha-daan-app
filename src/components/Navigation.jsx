@@ -23,13 +23,13 @@ export default function Navigation({ activeSection, setActiveSection }) {
   className={`nav-button ${activeSection === 'rhymes' ? 'active' : ''}`}
   onClick={() => setActiveSection('rhymes')}
 >
-  Rhymes 🎵
+  Rhymes 
 </button>
 <button
   className={`nav-button ${activeSection === 'multiplication' ? 'active' : ''}`}
   onClick={() => setActiveSection('multiplication')}
 >
-  নামতা ✖️
+  নামতা 
 </button>
     </nav>
   )

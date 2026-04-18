@@ -6,6 +6,7 @@ import NumbersSection from './components/NumbersSection'
 import EnglishSection from './components/EnglishSection'
 import RhymesSection from './components/RhymesSection'
 import MultiplicationSection from './components/MultiplicationSection'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   const [activeSection, setActiveSection] = useState('bangla')
@@ -26,6 +27,7 @@ function App() {
         {activeSection === 'rhymes' && <RhymesSection />}
         {activeSection === 'multiplication' && <MultiplicationSection />}
       </main>
+      <ScrollToTop />
     </div>
   )
 }
