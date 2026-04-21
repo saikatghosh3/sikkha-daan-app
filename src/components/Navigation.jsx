@@ -31,6 +31,12 @@ export default function Navigation({ activeSection, setActiveSection }) {
 >
   নামতা 
 </button>
+<button
+  className={`nav-button ${activeSection === 'match' ? 'active' : ''}`}
+  onClick={() => setActiveSection('match')}
+>
+  Match Game 
+</button>
     </nav>
   )
 }

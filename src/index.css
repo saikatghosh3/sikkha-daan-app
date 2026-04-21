@@ -55,3 +55,6 @@ button:hover {
 button:active {
   transform: translateY(0);
 }
+button {
+  -webkit-tap-highlight-color: transparent;
+}

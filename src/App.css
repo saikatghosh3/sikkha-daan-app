@@ -371,7 +371,7 @@
    📱 MOBILE (phones)
 ========================= */
 @media (max-width: 768px) {
-  story-container{
+  .story-container{
     background-size:contain;
   }
   .story-content {
@@ -561,5 +561,220 @@
     font-size: 18px;
     bottom: 15px;
     right: 15px;
+  }
+}
+
+/* match game css  */
+.match-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.match-title {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: white;
+}
+
+/* mode switch */
+.mode-switch {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+
+/* container */
+.mode-switch {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* button base */
+.mode-switch button {
+  padding: 10px 18px;
+
+  border: none;
+  border-radius: 50px;
+
+  background: rgba(255,255,255,0.15);
+  color: white;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(6px);
+
+  transition: all 0.25s ease;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+
+.mode-switch button:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: #74b9ff;
+}
+
+.mode-switch button.active {
+  background: linear-gradient(135deg, #6C5CE7, #00CEC9);
+  color: white;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* click */
+.mode-switch button:active {
+  transform: scale(0.95);
+}
+
+/* 📱 mobile */
+@media (max-width: 480px) {
+  .mode-switch button {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+}
+
+/* grid */
+.match-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.match-column {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.match-item {
+  padding: 14px 20px;
+  background: #f1f2f6;
+  border-radius: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  min-width: 120px;
+}
+
+.match-item:hover {
+  transform: scale(1.05);
+}
+
+/* selected */
+.match-item.selected {
+  background: #74b9ff;
+  color: white;
+}
+
+/* correct */
+.match-item.matched {
+  background: #55efc4;
+  color: #2d3436;
+  pointer-events: none;
+}
+
+/* wrong */
+.match-item.wrong {
+  background: #ff7675;
+  color: white;
+}
+
+/* score */
+.score-row {
+  margin-top: 25px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap; /* important for mobile */
+
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* keep both same baseline alignment */
+.score,
+.reset-btn {
+  flex: 0 0 auto;
+}
+
+
+.score,
+.reset-btn {
+  margin-top: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 12px 20px;
+
+  font-size: 18px;
+  font-weight: 600;
+
+  border: none;
+  border-radius: 50px;
+
+  color: white;
+
+  cursor: default;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+
+  transition: all 0.25s ease;
+}
+
+.score {
+  background: linear-gradient(135deg, #6C5CE7, #00CEC9);
+}
+
+.score::before {
+  content: "⭐";
+  font-size: 20px;
+}
+
+.reset-btn {
+  background: linear-gradient(135deg, #ff7675, #d63031);
+  cursor: pointer;
+}
+
+
+.reset-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+
+
+.reset-btn:active {
+  transform: scale(0.95);
+}
+
+.score:hover {
+  transform: scale(1.03);
+}
+
+@media (max-width: 480px) {
+  .score-row {
+    flex-direction: row;
+    gap: 2px;
+  }
+
+  .score,
+  .reset-btn {
+    width: 50%;
+    justify-content: center;
   }
 }
