@@ -1,4 +1,25 @@
 import { useState, useMemo } from "react"
+import confetti from 'canvas-confetti';
+
+const fireConfetti = () => {
+  const duration = 1500;
+  const end = Date.now() + duration;
+
+  const interval = setInterval(() => {
+    if (Date.now() > end) return clearInterval(interval);
+
+    confetti({
+      particleCount: 50,
+      spread: 100,
+      startVelocity: 30,
+      origin: {
+        x: Math.random(),
+        y: Math.random() - 0.2
+      }
+    });
+  }, 200);
+};
+
 
 export default function MatchGame() {
 
@@ -98,10 +119,15 @@ export default function MatchGame() {
     setShuffleKey(prev => prev + 1)
   }
 
+  const handleResetClick = () => {
+  resetGame();      
+  fireConfetti();   
+};
+
   return (
     <div className="match-container">
 
-      <h2 className="match-title">Match the Pair 🎯</h2>
+      <h2 className="match-title">Match the Pair </h2>
 
       <div className="mode-switch">
         <button
@@ -169,7 +195,7 @@ export default function MatchGame() {
           Score: {score}
         </p>
 
-        <button className="reset-btn" onClick={resetGame}>
+        <button className="reset-btn" onClick={handleResetClick}>
           🔄 Reset
         </button>
       </div>

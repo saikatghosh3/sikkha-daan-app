@@ -1,5 +1,28 @@
+import confetti from 'canvas-confetti';
+
+const fireConfetti = () => {
+  const duration = 1500;
+  const end = Date.now() + duration;
+
+  const interval = setInterval(() => {
+    if (Date.now() > end) return clearInterval(interval);
+
+    confetti({
+      particleCount: 50,
+      spread: 100,
+      startVelocity: 30,
+      origin: {
+        x: Math.random(),
+        y: Math.random() - 0.2
+      }
+    });
+  }, 200);
+};
+
 export default function MultiplicationSection() {
 
+
+  
 const toBanglaNumber = (number) => {
   const digits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯']
   return number
