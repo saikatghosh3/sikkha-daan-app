@@ -962,3 +962,331 @@
   animation: bajiExplode 0.7s ease-out forwards;
   animation-delay: var(--delay);
 }
+
+
+
+.shape-card-container {
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+
+.shape-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color:#fff
+}
+
+
+.shape-progress {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+
+.shape-card {
+  border: 2px solid;
+  border-radius: 16px;
+  padding: 24px;
+  background: #ffffff;
+  transition: all 0.25s ease;
+}
+
+
+.shape-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+
+.shape-svg {
+  margin-bottom: 15px;
+}
+
+.shape-svg svg {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Text */
+.shape-name {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 6px 0;
+}
+
+.shape-bn {
+  font-size: 16px;
+  color: #666;
+}
+
+/* Controls */
+.shape-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.shape-controls button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+
+  /* Remove default styles */
+  outline: none;
+  box-shadow: none;
+}
+
+/* Remove focus outline (clean but safe) */
+.shape-controls button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Better accessibility */
+.shape-controls button:focus-visible {
+  outline: 2px solid #999;
+  outline-offset: 2px;
+}
+
+/* Dots */
+.shape-dots {
+  margin-top: 10px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .shape-card {
+    padding: 20px;
+  }
+
+  .shape-name {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shape-card {
+    padding: 16px;
+  }
+
+  .shape-name {
+    font-size: 18px;
+  }
+
+  .shape-bn {
+    font-size: 14px;
+  }
+
+  .shape-svg svg {
+    max-width: 90px;
+  }
+
+  .shape-controls button {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+
+/* color section  css  */
+
+.color-container {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 0 16px;
+  text-align: center;
+}
+
+
+.color-title {
+  font-size: 22px;
+  margin-bottom: 12px;
+  color:#fff;
+}
+
+
+.color-card {
+  border-radius: 18px;
+  padding: 30px 20px;
+  color: #fff;
+  transition: transform 0.25s ease;
+}
+
+
+.color-card:active {
+  transform: scale(0.97);
+}
+
+
+.color-preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  background: rgba(255,255,255,0.3);
+}
+
+
+.color-name {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.color-bn {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.color-example {
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+
+.color-controls {
+  margin-top: 15px;
+}
+
+.color-controls button {
+  padding: 8px 14px;
+  margin: 6px;
+  border: none;
+  border-radius: 6px;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+.color-dots {
+  margin-top: 10px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #ccc;
+  display: inline-block;
+  margin: 4px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
+.dot.active {
+  background: #333;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .color-card {
+    padding: 20px 15px;
+  }
+
+  .color-name {
+    font-size: 20px;
+  }
+
+  .color-preview {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+
+/* body part section  */
+.body-container {
+  text-align: center;
+  max-width: 420px;
+  margin: auto;
+  padding: 0 16px;
+}
+
+.body-title {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+/* Tabs */
+.body-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.body-tabs button {
+  padding: 6px 12px;
+  border: none;
+  background: #333;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* SVG */
+.body-svg {
+  width: 100%;
+  max-width: 260px;
+  margin: 10px auto;
+}
+
+/* Default parts */
+.body-svg circle,
+.body-svg rect,
+.body-svg polygon {
+  fill: #ddd;
+  stroke: #999;
+  stroke-width: 0.5;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Active highlight */
+.active {
+  fill: #ff6b6b !important;
+}
+
+/* Label */
+.body-label {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .body-svg {
+    max-width: 220px;
+  }
+
+  .body-label {
+    font-size: 16px;
+  }
+}

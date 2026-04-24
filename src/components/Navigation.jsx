@@ -3,7 +3,6 @@ import { useRef } from 'react';
 
 export default function Navigation({ activeSection, setActiveSection }) {
 
-  // 👇 alternating side control (left → right → left...)
   const toggleRef = useRef(false);
 
   const fireConfetti = () => {
@@ -14,7 +13,7 @@ export default function Navigation({ activeSection, setActiveSection }) {
       spread: 80,
       startVelocity: 30,
       origin: {
-        x: toggleRef.current ? 0.1 : 0.9, // 👈 left / right alternate
+        x: toggleRef.current ? 0.1 : 0.9, 
         y: 0.6
       }
     });
@@ -69,6 +68,18 @@ export default function Navigation({ activeSection, setActiveSection }) {
       >
         Match Game
       </button>
+      <button
+  className={`nav-button ${activeSection === 'shapes' ? 'active' : ''}`}
+  onClick={(e) => handleClick('shapes', 'confetti', e.currentTarget)}
+   >
+     Shapes 
+   </button>
+   <button
+  className={`nav-button ${activeSection === 'colors' ? 'active' : ''}`}
+  onClick={() => handleClick('colors')}
+>
+  Colors 
+</button>
     </nav>
   );
 }
