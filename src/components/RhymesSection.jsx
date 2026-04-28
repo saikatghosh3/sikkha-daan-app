@@ -102,46 +102,84 @@ const englishRhymes = [
   )
 }
 
-function RhymeStoryBlock({ title, data }) {
+// function RhymeStoryBlock({ title, data }) {
 
-  const [index, setIndex] = useState(0)
+//   const [index, setIndex] = useState(0)
 
-  const current = data[index]
+//   const current = data[index]
 
-  const next = () => {
-    setIndex((prev) => (prev + 1) % data.length)
-  }
+//   const next = () => {
+//     setIndex((prev) => (prev + 1) % data.length)
+//   }
 
-  const prev = () => {
-    setIndex((prev) => (prev - 1 + data.length) % data.length)
-  }
+//   const prev = () => {
+//     setIndex((prev) => (prev - 1 + data.length) % data.length)
+//   }
+
+//   return (
+//     <div
+//       className="story-container"
+//       style={{
+//         backgroundImage: `url(${current.image})`
+//       }}
+//     >
+
+//       <div className="overlay"></div>
+
+//       <div className="story-content">
+
+//         <h2 className="section-title">{title}</h2>
+//         <hr />
+
+//         <h3 className="story-title">{current.title}</h3>
+
+//         <p className="story-text">{current.text}</p>
+
+//         <div className="story-controls">
+//           <button onClick={prev}>⬅ previous</button>
+//           <button onClick={next}>next ➡</button>
+//         </div>
+
+//       </div>
+
+//     </div>
+//   )
+// }
+
+function RhymeStoryBlock({ title, data, bgColor = "rgba(0,0,0,0.6)" }) {
+  const [index, setIndex] = useState(0);
+  const current = data[index];
 
   return (
     <div
       className="story-container"
-      style={{
-        backgroundImage: `url(${current.image})`
-      }}
+      style={{ backgroundImage: `url(${current.image})` }}
     >
-
-      <div className="overlay"></div>
+      {/* ইনলাইন স্টাইলে height এবং width 100% নিশ্চিত করা হয়েছে */}
+      <div 
+        className="overlay" 
+        style={{ 
+          backgroundColor: bgColor,
+          height: '100%',
+          width: '100%' 
+        }}
+      ></div>
 
       <div className="story-content">
-
         <h2 className="section-title">{title}</h2>
-        <hr />
-
+        <div className="divider"></div>
         <h3 className="story-title">{current.title}</h3>
-
         <p className="story-text">{current.text}</p>
-
+        
         <div className="story-controls">
-          <button onClick={prev}>⬅ previous</button>
-          <button onClick={next}>next ➡</button>
+          <button className="nav-btn" onClick={() => setIndex((prev) => (prev - 1 + data.length) % data.length)}>
+            ⬅ আগেরটি
+          </button>
+          <button className="nav-btn" onClick={() => setIndex((prev) => (prev + 1) % data.length)}>
+            পরেরটি ➡
+          </button>
         </div>
-
       </div>
-
     </div>
-  )
+  );
 }
