@@ -29,34 +29,23 @@ const COLORS = [
   { bg: '#10b981', light: '#d1fae5' },
 ]
 
-function DragCard({ item, side, matched, selected, wrong, disabled, onSelect, onDragStart }) {
-  const color = COLORS[item.id % COLORS.length]
-
-  return (
-    <div
-      draggable={side === 'left' && !matched && !disabled}
-      onDragStart={(e) => {
-        if (side === 'left' && !matched) {
-          e.dataTransfer.setData('text/plain', JSON.stringify(item))
-          onDragStart?.(item)
-        }
-      }}
-      className={`match-card ${side} ${matched ? 'matched' : ''} ${selected ? 'selected' : ''} ${wrong ? 'wrong' : ''} ${disabled ? 'disabled' : ''}`}
-      onClick={() => !disabled && !matched && onSelect?.(item)}
-      style={{
-        '--card-bg': color.bg,
-        '--card-light': color.light,
-      }}
-    >
-      <span className="match-card-value">{item[side === 'left' ? 'left_value' : 'right_value']}</span>
-      {matched && <span className="match-card-check">✓</span>}
-    </div>
-  )
-}
+const STATIC_PAIRS = [
+  { id: 1, mode: 'english', left_value: 'A', right_value: 'Apple' },
+  { id: 2, mode: 'english', left_value: 'B', right_value: 'Ball' },
+  { id: 3, mode: 'english', left_value: 'C', right_value: 'Cat' },
+  { id: 4, mode: 'english', left_value: 'D', right_value: 'Dog' },
+  { id: 5, mode: 'bangla', left_value: 'অ', right_value: 'অজগর' },
+  { id: 6, mode: 'bangla', left_value: 'আ', right_value: 'আম' },
+  { id: 7, mode: 'bangla', left_value: 'ই', right_value: 'ইঁদুর' },
+  { id: 8, mode: 'bangla', left_value: 'উ', right_value: 'উট' },
+  { id: 9, mode: 'numbers', left_value: '১', right_value: 'One' },
+  { id: 10, mode: 'numbers', left_value: '২', right_value: 'Two' },
+  { id: 11, mode: 'numbers', left_value: '৩', right_value: 'Three' },
+  { id: 12, mode: 'numbers', left_value: '৪', right_value: 'Four' },
+]
 
 export default function MatchGame() {
-  const [allPairs, setAllPairs] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [allPairs, setAllPairs] = useState(STATIC_PAIRS)
   const [mode, setMode] = useState('english')
   const [shuffleKey, setShuffleKey] = useState(0)
   const [selectedLeft, setSelectedLeft] = useState(null)
@@ -71,9 +60,8 @@ export default function MatchGame() {
 
   useEffect(() => {
     api.matchGame.getAll()
-      .then(setAllPairs)
-      .catch(console.error)
-      .finally(() => setLoading(false))
+      .then(data => { if (data.length) setAllPairs(data) })
+      .catch(() => {})
   }, [])
 
   const data = useMemo(() => allPairs.filter(p => p.mode === mode), [allPairs, mode])
@@ -132,9 +120,7 @@ export default function MatchGame() {
       const leftItem = JSON.parse(e.dataTransfer.getData('text/plain'))
       if (matched.includes(leftItem.id)) return
       const rightEl = e.target.closest('.match-card.right')
-      if (rightEl) {
-        return
-      }
+      if (rightEl) return
     } catch {}
   }, [matched])
 
@@ -171,10 +157,7 @@ export default function MatchGame() {
     setShuffleKey(prev => prev + 1)
   }, [])
 
-  if (loading) return <div className="match-loading">Loading...</div>
-
   const progress = data.length > 0 ? (matched.length / data.length) * 100 : 0
-  const leftUnmatched = data.filter(d => !matched.includes(d.id))
 
   return (
     <div className="match-wrapper">
