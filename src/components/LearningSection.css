@@ -1,0 +1,693 @@
+/* ===== LEARNING SECTIONS - KID FRIENDLY DESIGN ===== */
+
+/* ---- Section Wrapper ---- */
+.learn-section {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.learn-section-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.learn-section-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  letter-spacing: -0.3px;
+}
+
+.learn-section-subtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  margin: 6px 0 0;
+}
+
+/* ---- Loading ---- */
+.learn-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  color: rgba(255,255,255,0.7);
+  font-size: 16px;
+  gap: 12px;
+}
+
+.learn-loading::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,0.15);
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: learnSpin 0.6s linear infinite;
+}
+
+@keyframes learnSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Tab Switcher ---- */
+.learn-tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.learn-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.6);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.25s;
+  backdrop-filter: blur(4px);
+}
+
+.learn-tab:hover {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.9);
+  transform: translateY(-2px);
+}
+
+.learn-tab.active {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+  transform: translateY(-2px);
+}
+
+.learn-tab-icon {
+  font-size: 18px;
+}
+
+.learn-tab-count {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* ---- Progress ---- */
+.learn-progress {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 10px 16px;
+  backdrop-filter: blur(4px);
+}
+
+.learn-progress-bar {
+  flex: 1;
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.learn-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+  background: linear-gradient(90deg, #6366f1, #a78bfa);
+}
+
+.learn-progress-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  white-space: nowrap;
+  min-width: 70px;
+  text-align: right;
+}
+
+/* ---- Main Card ---- */
+.learn-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s;
+  animation: learnCardIn 0.4s ease;
+}
+
+.learn-card .learn-image {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.learn-card.loaded .learn-image {
+  opacity: 1;
+}
+
+@keyframes learnCardIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.learn-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ---- Character Display ---- */
+.learn-character {
+  font-size: 96px;
+  font-weight: 800;
+  line-height: 1;
+  margin: 8px 0;
+  color: #fff;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  animation: learnCharIn 0.5s ease;
+}
+
+@keyframes learnCharIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.learn-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  margin: 8px 0 4px;
+}
+
+.learn-name-bn {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  margin: 0;
+}
+
+.learn-description {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  margin: 8px 0 0;
+  line-height: 1.5;
+}
+
+/* ---- Image inside card ---- */
+.learn-image-wrap {
+  margin: 12px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.learn-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 3px solid rgba(255,255,255,0.15);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  transition: transform 0.3s;
+}
+
+.learn-image:hover {
+  transform: scale(1.05);
+}
+
+/* ---- Color Card ---- */
+.learn-color-card {
+  border-radius: 24px;
+  padding: 40px 24px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  animation: learnCardIn 0.4s ease;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.learn-color-swatch {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  border: 4px solid rgba(255,255,255,0.2);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  animation: learnSwatchIn 0.5s ease;
+}
+
+@keyframes learnSwatchIn {
+  0% { transform: scale(0) rotate(-30deg); }
+  60% { transform: scale(1.1) rotate(5deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+.learn-color-name {
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+  margin: 4px 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.learn-color-name-bn {
+  font-size: 16px;
+  color: rgba(255,255,255,0.75);
+  margin: 2px 0;
+}
+
+.learn-color-example {
+  font-size: 20px;
+  margin: 12px 0 0;
+  opacity: 0.9;
+}
+
+/* ---- Shape Card ---- */
+.learn-shape-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 32px 24px;
+  text-align: center;
+  animation: learnCardIn 0.4s ease;
+  backdrop-filter: blur(8px);
+}
+
+.learn-shape-svg {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.learn-shape-svg svg {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.15));
+  animation: learnShapeIn 0.6s ease;
+}
+
+@keyframes learnShapeIn {
+  0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+  60% { transform: scale(1.1) rotate(10deg); }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.learn-shape-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin: 8px 0 4px;
+}
+
+.learn-shape-name-bn {
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  margin: 0;
+}
+
+/* ---- Rhyme Card ---- */
+.learn-rhyme-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04));
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 32px 24px;
+  text-align: center;
+  animation: learnCardIn 0.4s ease;
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+}
+
+.learn-rhyme-card::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(99, 102, 241, 0.08);
+  pointer-events: none;
+}
+
+.learn-rhyme-card::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  left: -60px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.06);
+  pointer-events: none;
+}
+
+.learn-rhyme-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.learn-rhyme-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 12px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.learn-rhyme-text {
+  font-size: 18px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.85);
+  white-space: pre-line;
+  margin: 0;
+  font-weight: 500;
+}
+
+.learn-rhyme-number {
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 16px;
+  display: block;
+}
+
+/* ---- Controls ---- */
+.learn-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.learn-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 100px;
+}
+
+.learn-btn-prev {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.learn-btn-prev:hover {
+  background: rgba(255,255,255,0.18);
+  transform: translateX(-2px);
+}
+
+.learn-btn-next {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+}
+
+.learn-btn-next:hover {
+  transform: translateX(2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+}
+
+.learn-btn-auto {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.1);
+  min-width: auto;
+  padding: 12px 16px;
+}
+
+.learn-btn-auto:hover {
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+.learn-btn-auto.playing {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+/* ---- Dots ---- */
+.learn-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.learn-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s;
+  padding: 0;
+}
+
+.learn-dot:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.learn-dot.active {
+  width: 28px;
+  border-radius: 5px;
+  background: #6366f1;
+}
+
+/* ---- Empty State ---- */
+.learn-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: rgba(255,255,255,0.5);
+  font-size: 16px;
+}
+
+.learn-empty-hint {
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  margin-top: 6px;
+}
+
+/* ---- Page Indicator ---- */
+.learn-page-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ---- Multiplication Section ---- */
+.multiply-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+}
+
+.multiply-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.multiply-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.multiply-subtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  margin: 6px 0 0;
+}
+
+.multiply-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.multiply-card {
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.multiply-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+}
+
+.multiply-card-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.multiply-card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.multiply-card-item {
+  padding: 5px 10px;
+  margin: 3px 0;
+  background: rgba(255,255,255,0.12);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.multiply-card-item:hover {
+  background: rgba(255,255,255,0.22);
+  transform: scale(1.03);
+}
+
+/* ---- Rhymes Tab Section ---- */
+.learn-rhymes-section {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+  .learn-section {
+    padding: 12px 12px 32px;
+  }
+
+  .learn-section-title {
+    font-size: 22px;
+  }
+
+  .learn-tab {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .learn-card,
+  .learn-rhyme-card,
+  .learn-shape-card {
+    padding: 24px 16px;
+  }
+
+  .learn-character {
+    font-size: 72px;
+  }
+
+  .learn-name {
+    font-size: 17px;
+  }
+
+  .learn-btn {
+    padding: 10px 20px;
+    font-size: 13px;
+    min-width: 80px;
+  }
+
+  .learn-rhyme-text {
+    font-size: 16px;
+  }
+
+  .multiply-title {
+    font-size: 22px;
+  }
+
+  .multiply-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .learn-character {
+    font-size: 56px;
+  }
+
+  .learn-tabs {
+    gap: 6px;
+  }
+
+  .learn-tab {
+    padding: 6px 14px;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+
+  .learn-progress {
+    padding: 8px 12px;
+  }
+
+  .learn-image {
+    width: 90px;
+    height: 90px;
+  }
+
+  .learn-color-swatch {
+    width: 80px;
+    height: 80px;
+  }
+
+  .learn-rhyme-text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .learn-shape-svg svg {
+    width: 90px;
+    height: 90px;
+  }
+}

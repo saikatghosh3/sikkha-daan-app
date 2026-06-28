@@ -1,39 +1,23 @@
+import { useState, useEffect } from 'react'
+import { api } from '../api/client'
 import FlashCard from './FlashCard'
 
 export default function EnglishSection() {
+  const [items, setItems] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const englishItems = [
-    { character: 'A', image: '/img/apple.png' },
-    { character: 'B', image: '/img/Ball.png' },
-    { character: 'C', image: '/img/cat.png' },
-    { character: 'D', image: '/img/dog.png' },
-    { character: 'E', image: '/img/elephant.png' },
-    { character: 'F', image: '/img/fish.png' },
-    { character: 'G', image: '/img/giraffe.png' },
-    { character: 'H', image: '/img/house.png' },
-    { character: 'I', image: '/img/icecream.png' },
-    { character: 'J', image: '/img/jar.png' },
-    { character: 'K', image: '/img/king.png' },
-    { character: 'L', image: '/img/lion.png' },
-    { character: 'M', image: '/img/mouse.png' },
-    { character: 'N', image: '/img/nest.png' },
-    { character: 'O', image: '/img/octopus.png' },
-    { character: 'P', image: '/img/penguin.png' },
-    { character: 'Q', image: '/img/queen.png' },
-    { character: 'R', image: '/img/rabbit.png' },
-    { character: 'S', image: '/img/snake.png' },
-    { character: 'T', image: '/img/train.png' },
-    { character: 'U', image: '/img/umbrella.png' },
-    { character: 'V', image: '/img/violen.png' },
-    { character: 'W', image: '/img/whale.png' },
-    { character: 'X', image: '/img/xylophone.png' },
-    { character: 'Y', image: '/img/yoyo.png' },
-    { character: 'Z', image: '/img/zebra.png' },
-  ]
+  useEffect(() => {
+    api.english.getAll()
+      .then(setItems)
+      .catch(console.error)
+      .finally(() => setLoading(false))
+  }, [])
+
+  if (loading) return null
 
   return (
     <FlashCard
-      items={englishItems}
+      items={items}
       title="English Alphabet"
       categoryColor="#FFB347"
     />
