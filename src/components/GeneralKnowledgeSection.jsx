@@ -21,8 +21,35 @@ const BG_GRADIENTS = [
   'linear-gradient(135deg, #96fbc4 0%, #f9f586 100%)',
 ]
 
+const STATIC_GK_ITEMS = [
+  { id: 1, category: 'national', title: 'National Bird', name: 'Oriental Magpie Robin', name_bn: 'দোয়েল', description: 'The national bird of Bangladesh, known for its melodious song.', image: '' },
+  { id: 2, category: 'national', title: 'National Flower', name: 'Water Lily', name_bn: 'শাপলা', description: 'The national flower of Bangladesh, found in water bodies across the country.', image: '' },
+  { id: 3, category: 'national', title: 'National Animal', name: 'Royal Bengal Tiger', name_bn: 'রয়েল বেঙ্গল টাইগার', description: 'The national animal of Bangladesh, found in the Sundarbans mangrove forest.', image: '' },
+  { id: 4, category: 'national', title: 'National Fruit', name: 'Jackfruit', name_bn: 'কাঁঠাল', description: 'The national fruit of Bangladesh, known as the largest fruit in the world.', image: '' },
+  { id: 5, category: 'national', title: 'National Fish', name: 'Hilsha', name_bn: 'ইলিশ', description: 'The national fish of Bangladesh, a popular and delicious fish.', image: '' },
+  { id: 6, category: 'national', title: 'National Sport', name: 'Kabaddi', name_bn: 'কাবাডি', description: 'The national sport of Bangladesh, also known as Ha-du-du.', image: '' },
+  { id: 7, category: 'geography', title: 'Capital City', name: 'Dhaka', name_bn: 'ঢাকা', description: 'The capital and largest city of Bangladesh, home to over 10 million people.', image: '' },
+  { id: 8, category: 'geography', title: 'Total Area', name: '147,570 km²', name_bn: '১,৪৭,৫৭০ বর্গ কিমি', description: 'Bangladesh has a total area of 147,570 square kilometers.', image: '' },
+  { id: 9, category: 'geography', title: 'Number of Divisions', name: '8 Divisions', name_bn: '৮টি বিভাগ', description: 'Bangladesh is divided into 8 administrative divisions.', image: '' },
+  { id: 10, category: 'geography', title: 'Number of Districts', name: '64 Districts', name_bn: '৬৪টি জেলা', description: 'Bangladesh has 64 districts (zila).', image: '' },
+  { id: 11, category: 'geography', title: 'Largest Division', name: 'Chittagong Division', name_bn: 'চট্টগ্রাম বিভাগ', description: 'The largest division by area in Bangladesh.', image: '' },
+  { id: 12, category: 'geography', title: 'Major Rivers', name: 'Padma, Meghna, Jamuna', name_bn: 'পদ্মা, মেঘনা, যমুনা', description: 'The three major rivers of Bangladesh.', image: '' },
+  { id: 13, category: 'history', title: 'Independence Day', name: 'March 26', name_bn: '২৬ মার্চ', description: 'Bangladesh gained independence on March 26, 1971.', image: '' },
+  { id: 14, category: 'history', title: 'Victory Day', name: 'December 16', name_bn: '১৬ ডিসেম্বর', description: 'Victory Day commemorates the surrender of Pakistani forces in 1971.', image: '' },
+  { id: 15, category: 'history', title: 'Language Movement Day', name: 'February 21', name_bn: '২১ ফেব্রুয়ারি', description: 'International Mother Language Day, commemorating the 1952 language movement.', image: '' },
+  { id: 16, category: 'history', title: 'Founding Father', name: 'Bangabandhu Sheikh Mujibur Rahman', name_bn: 'বঙ্গবন্ধু শেখ মুজিবুর রহমান', description: 'The founding father and first President of Bangladesh.', image: '' },
+  { id: 17, category: 'culture', title: 'New Year', name: 'Pohela Boishakh', name_bn: 'পহেলা বৈশাখ', description: 'The Bengali New Year, celebrated on April 14 with festivals and parades.', image: '' },
+  { id: 18, category: 'culture', title: 'National Dress', name: 'Sharee & Panjabi', name_bn: 'শাড়ি ও পাঞ্জাবি', description: 'Traditional dresses of Bangladesh: sharee for women, panjabi for men.', image: '' },
+  { id: 19, category: 'culture', title: 'National Language', name: 'Bangla (Bengali)', name_bn: 'বাংলা', description: 'The official language of Bangladesh, spoken by 98% of the population.', image: '' },
+  { id: 20, category: 'general', title: 'Currency', name: 'Bangladeshi Taka', name_bn: 'বাংলাদেশী টাকা', description: 'The official currency of Bangladesh, symbolized as ৳ and ISO code BDT.', image: '' },
+  { id: 21, category: 'general', title: 'Time Zone', name: 'BST (UTC+6)', name_bn: 'বাংলাদেশ মান সময়', description: 'Bangladesh Standard Time is 6 hours ahead of Coordinated Universal Time.', image: '' },
+  { id: 22, category: 'general', title: 'Calling Code', name: '+880', name_bn: '+৮৮০', description: 'The international dialing code for Bangladesh.', image: '' },
+  { id: 23, category: 'general', title: 'National Anthem', name: 'Amar Shonar Bangla', name_bn: 'আমার সোনার বাংলা', description: 'Written by Rabindranath Tagore, adopted in 1972.', image: '' },
+  { id: 24, category: 'general', title: 'Government Type', name: 'Unitary Parliamentary Republic', name_bn: 'একক সংসদীয় প্রজাতন্ত্র', description: 'Bangladesh is a parliamentary republic with a Prime Minister as head of government.', image: '' },
+]
+
 export default function GeneralKnowledgeSection() {
-  const [items, setItems] = useState([])
+  const [items, setItems] = useState(STATIC_GK_ITEMS)
   const [activeCat, setActiveCat] = useState('national')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [autoPlay, setAutoPlay] = useState(false)
@@ -30,7 +57,13 @@ export default function GeneralKnowledgeSection() {
 
   useEffect(() => {
     api.generalKnowledge.getAll()
-      .then(data => { if (data.length) setItems(data) })
+      .then(data => {
+        if (data.length) {
+          const existingIds = new Set(STATIC_GK_ITEMS.map(i => i.id))
+          const merged = [...STATIC_GK_ITEMS, ...data.filter(i => !existingIds.has(i.id))]
+          setItems(merged)
+        }
+      })
       .catch(() => {})
   }, [])
 
