@@ -7,6 +7,7 @@ import RhymesManager from './pages/RhymesManager'
 import MatchGameManager from './pages/MatchGameManager'
 import ShapesManager from './pages/ShapesManager'
 import ColorsManager from './pages/ColorsManager'
+import GeneralKnowledgeManager from './pages/GeneralKnowledgeManager'
 import AdminLogin from './AdminLogin'
 import './admin.css'
 
@@ -19,6 +20,7 @@ const navItems = [
   { key: 'matchgame', label: 'Match Game', icon: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M20 2a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"%3E%3C/path%3E%3Cpath d="M8 12h8"%3E%3C/path%3E%3Cpath d="M12 8v8"%3E%3C/path%3E%3C/svg%3E' },
   { key: 'shapes', label: 'Shapes', icon: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpolygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"%3E%3C/polygon%3E%3C/svg%3E' },
   { key: 'colors', label: 'Colors', icon: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Ccircle cx="12" cy="12" r="10"%3E%3C/circle%3E%3Cpath d="M12 2a7 7 0 0 0 0 14c2.2 0 4-1.8 4-4s-1.8-4-4-4"%3E%3C/path%3E%3C/svg%3E' },
+  { key: 'generalknowledge', label: 'GK', icon: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Ccircle cx="12" cy="12" r="10"%3E%3C/circle%3E%3Cpath d="M12 16v-4"%3E%3C/path%3E%3Cpath d="M12 8h.01"%3E%3C/path%3E%3C/svg%3E' },
 ]
 
 export default function AdminPanel({ onExit }) {
@@ -40,6 +42,7 @@ export default function AdminPanel({ onExit }) {
       case 'matchgame': return <MatchGameManager />
       case 'shapes': return <ShapesManager />
       case 'colors': return <ColorsManager />
+      case 'generalknowledge': return <GeneralKnowledgeManager />
       default: return <Dashboard />
     }
   }

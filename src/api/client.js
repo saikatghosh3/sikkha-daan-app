@@ -86,6 +86,15 @@ export const api = {
     delete: (id) => request(`/colors/${id}`, { method: 'DELETE' }),
   },
 
+  // General Knowledge
+  generalKnowledge: {
+    getAll: () => request('/general-knowledge'),
+    get: (id) => request(`/general-knowledge/${id}`),
+    create: (data) => request('/general-knowledge', { method: 'POST', body: JSON.stringify(data) }),
+    update: (id, data) => request(`/general-knowledge/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+    delete: (id) => request(`/general-knowledge/${id}`, { method: 'DELETE' }),
+  },
+
   // Auth
   auth: {
     login: (email, password) => request('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }),

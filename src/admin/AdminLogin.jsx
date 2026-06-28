@@ -25,29 +25,11 @@ export default function AdminLogin({ onLogin }) {
 
   return (
     <div className="admin-login-wrapper">
-      <div className="admin-login-left">
-        <div className="admin-login-brand">
-          <div className="admin-login-brand-logo">SD</div>
-          <h1>Sikkha Daan</h1>
-          <p>শিক্ষা দান — শিক্ষার অফুরান দান</p>
-          <span className="admin-login-brand-badge">Admin Panel</span>
-        </div>
-        <div className="admin-login-illustration">
-          <div className="admin-login-illu-circle" />
-          <div className="admin-login-illu-circle small" />
-          <div className="admin-login-illu-dots">
-            {[...Array(5)].map((_, i) => (
-              <span key={i} className="admin-login-illu-dot" style={{ '--i': i }} />
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="admin-login-right">
+      <div className="admin-login-container">
         <div className="admin-login-card">
-          <div className="admin-login-card-header">
-            <h2 className="admin-login-card-title">Welcome Back</h2>
-            <p className="admin-login-card-subtitle">Sign in to manage your content</p>
-          </div>
+          <div className="admin-login-logo">SD</div>
+          <h1 className="admin-login-title">Sikkha Daan</h1>
+          <p className="admin-login-subtitle">শিক্ষা দান — Admin Panel</p>
 
           <form onSubmit={handleSubmit}>
             {error && <div className="admin-login-error">{error}</div>}

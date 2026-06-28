@@ -11,6 +11,7 @@ const shapesRoutes = require('./routes/shapes');
 const colorsRoutes = require('./routes/colors');
 const uploadRoutes = require('./routes/upload');
 const authRoutes = require('./routes/auth');
+const generalKnowledgeRoutes = require('./routes/generalknowledge');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -29,6 +30,7 @@ app.use('/api/shapes', shapesRoutes);
 app.use('/api/colors', colorsRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/general-knowledge', generalKnowledgeRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 

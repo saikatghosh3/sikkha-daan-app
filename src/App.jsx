@@ -10,6 +10,7 @@ import ScrollToTop from './components/ScrollToTop'
 import MatchGame from './components/MatchGame'
 import ShapesSection from './components/ShapesSection'
 import ColorsSection from './components/ColorsSection'
+import GeneralKnowledgeSection from './components/GeneralKnowledgeSection'
 import AdminPanel from './admin/AdminPanel'
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
         {activeSection === 'match' && <MatchGame />}
         {activeSection === 'shapes' && <ShapesSection />}
         {activeSection === 'colors' && <ColorsSection />}
+        {activeSection === 'generalknowledge' && <GeneralKnowledgeSection />}
       </main>
       <ScrollToTop />
     </div>

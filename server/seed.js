@@ -158,6 +158,26 @@ const data = {
     { id: 11, name_en: 'Parallelogram', name_bn: 'সামান্তরিক', svg_type: 'parallelogram', color: '#55E6C1', sort_order: 10 },
     { id: 12, name_en: 'Trapezium', name_bn: 'ট্রাপিজিয়াম', svg_type: 'trapezium', color: '#D6A2E8', sort_order: 11 },
   ],
+  general_knowledge: [
+    { id: 1, category: 'national', title: 'National Bird', name: 'Oriental Magpie Robin', name_bn: 'দোয়েল', image: '', description: 'The national bird of Bangladesh, known for its melodious song.', sort_order: 0 },
+    { id: 2, category: 'national', title: 'National Flower', name: 'Water Lily', name_bn: 'শাপলা', image: '', description: 'The national flower of Bangladesh, found in water bodies across the country.', sort_order: 1 },
+    { id: 3, category: 'national', title: 'National Animal', name: 'Royal Bengal Tiger', name_bn: 'রয়েল বেঙ্গল টাইগার', image: '', description: 'The national animal of Bangladesh, found in the Sundarbans.', sort_order: 2 },
+    { id: 4, category: 'national', title: 'National Fruit', name: 'Jackfruit', name_bn: 'কাঁঠাল', image: '', description: 'The national fruit of Bangladesh, known as the largest fruit in the world.', sort_order: 3 },
+    { id: 5, category: 'national', title: 'National Fish', name: 'Hilsha', name_bn: 'ইলিশ', image: '', description: 'The national fish of Bangladesh, a popular and delicious fish.', sort_order: 4 },
+    { id: 6, category: 'national', title: 'National Sport', name: 'Kabaddi', name_bn: 'কাবাডি', image: '', description: 'The national sport of Bangladesh, also known as Ha-du-du.', sort_order: 5 },
+    { id: 7, category: 'geography', title: 'Capital City', name: 'Dhaka', name_bn: 'ঢাকা', image: '', description: 'The capital and largest city of Bangladesh.', sort_order: 6 },
+    { id: 8, category: 'geography', title: 'Total Area', name: '147,570 km²', name_bn: '১,৪৭,৫৭০ বর্গ কিমি', image: '', description: 'Bangladesh has a total area of 147,570 square kilometers.', sort_order: 7 },
+    { id: 9, category: 'geography', title: 'Number of Divisions', name: '8 Divisions', name_bn: '৮টি বিভাগ', image: '', description: 'Bangladesh is divided into 8 administrative divisions.', sort_order: 8 },
+    { id: 10, category: 'geography', title: 'Number of Districts', name: '64 Districts', name_bn: '৬৪টি জেলা', image: '', description: 'Bangladesh has 64 districts (zila).', sort_order: 9 },
+    { id: 11, category: 'geography', title: 'Largest Division', name: 'Chittagong Division', name_bn: 'চট্টগ্রাম বিভাগ', image: '', description: 'The largest division by area in Bangladesh.', sort_order: 10 },
+    { id: 12, category: 'geography', title: 'Major River', name: 'Padma, Meghna, Jamuna', name_bn: 'পদ্মা, মেঘনা, যমুনা', image: '', description: 'The three major rivers of Bangladesh.', sort_order: 11 },
+    { id: 13, category: 'history', title: 'Independence Day', name: 'March 26', name_bn: '২৬ মার্চ', image: '', description: 'Bangladesh gained independence on March 26, 1971.', sort_order: 12 },
+    { id: 14, category: 'history', title: 'Victory Day', name: 'December 16', name_bn: '১৬ ডিসেম্বর', image: '', description: 'Victory Day commemorates the surrender of Pakistani forces in 1971.', sort_order: 13 },
+    { id: 15, category: 'history', title: 'Language Movement Day', name: 'February 21', name_bn: '২১ ফেব্রুয়ারি', image: '', description: 'International Mother Language Day, commemorating the 1952 language movement.', sort_order: 14 },
+    { id: 16, category: 'history', title: 'Founding Father', name: 'Bangabandhu Sheikh Mujibur Rahman', name_bn: 'বঙ্গবন্ধু শেখ মুজিবুর রহমান', image: '', description: 'The founding father and first President of Bangladesh.', sort_order: 15 },
+    { id: 17, category: 'culture', title: 'New Year', name: 'Pohela Boishakh', name_bn: 'পহেলা বৈশাখ', image: '', description: 'The Bengali New Year, celebrated on April 14 with festivals and parades.', sort_order: 16 },
+    { id: 18, category: 'culture', title: 'National Dress', name: 'Sharee & Panjabi', name_bn: 'শাড়ি ও পাঞ্জাবি', image: '', description: 'Traditional dresses of Bangladesh: sharee for women, panjabi for men.', sort_order: 17 },
+  ],
   colors: [
     { id: 1, name_en: 'Red', name_bn: 'লাল', color: '#FF4D4D', example: '🍎 Apple', sort_order: 0 },
     { id: 2, name_en: 'Blue', name_bn: 'নীল', color: '#4D9DFF', example: '🌊 Sky', sort_order: 1 },
@@ -167,8 +187,11 @@ const data = {
     { id: 6, name_en: 'Purple', name_bn: 'বেগুনি', color: '#9B59B6', example: '🍇 Grapes', sort_order: 5 },
     { id: 7, name_en: 'Pink', name_bn: 'গোলাপি', color: '#FF69B4', example: '🌸 Flower', sort_order: 6 },
   ],
-  app_settings: {},
-  _nextId: 100,
+  app_settings: {
+    admin_email: 'admin@sikkhadaan.com',
+    admin_password: 'admin123',
+  },
+  _nextId: 200,
 };
 
 fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));

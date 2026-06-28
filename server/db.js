@@ -16,6 +16,7 @@ function getDb() {
       match_game_pairs: [],
       shapes: [],
       colors: [],
+      general_knowledge: [],
       app_settings: {},
       _nextId: 1,
     };

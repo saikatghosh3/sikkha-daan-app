@@ -695,3 +695,82 @@
     height: 90px;
   }
 }
+
+/* ===== GENERAL KNOWLEDGE ===== */
+.gk-card {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.gk-emoji {
+  font-size: 40px;
+}
+
+.gk-emoji-large {
+  font-size: 64px;
+  margin-bottom: 8px;
+  opacity: 0.6;
+}
+
+.gk-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  margin: 0;
+}
+
+.gk-name-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gk-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.95);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.gk-name-bn {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.gk-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  text-align: center;
+  max-width: 500px;
+  margin: 4px 0 0;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .gk-card {
+    min-height: 200px;
+    padding: 24px 16px;
+  }
+
+  .gk-title {
+    font-size: 20px;
+  }
+
+  .gk-name, .gk-name-bn {
+    font-size: 15px;
+  }
+
+  .gk-emoji-large {
+    font-size: 48px;
+  }
+}

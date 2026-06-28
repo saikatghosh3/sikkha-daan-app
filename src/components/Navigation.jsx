@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { key: 'match', label: '🎯', sub: 'Match' },
   { key: 'shapes', label: '🔷', sub: 'Shapes' },
   { key: 'colors', label: '🎨', sub: 'Colors' },
+  { key: 'generalknowledge', label: '🧠', sub: 'GK' },
 ]
 
 export default function Navigation({ activeSection, setActiveSection }) {
