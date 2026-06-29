@@ -1,4 +1,10 @@
-const API_BASE = '/api'
+const API_BASE = (import.meta.env.VITE_API_URL || '') + '/api'
+
+function imgUrl(path) {
+  if (!path) return ''
+  if (path.startsWith('http')) return path
+  return (import.meta.env.VITE_API_URL || '') + path
+}
 
 async function request(url, options = {}) {
   const res = await fetch(`${API_BASE}${url}`, {
@@ -11,6 +17,8 @@ async function request(url, options = {}) {
   }
   return res.json()
 }
+
+export { imgUrl }
 
 export const api = {
   // Bangla
@@ -109,6 +117,8 @@ export const api = {
       const err = await res.json().catch(() => ({ error: res.statusText }))
       throw new Error(err.error || 'Upload failed')
     }
-    return res.json()
+    const data = await res.json()
+    data.url = imgUrl(data.url)
+    return data
   },
 }

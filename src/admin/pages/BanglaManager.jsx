@@ -32,7 +32,7 @@ export default function BanglaManager() {
       setVowels(v)
       setConsonants(c)
     } catch (err) {
-      alert('Failed to load data: ' + err.message)
+      console.error('Failed to load Bangla data:', err)
     } finally {
       setLoading(false)
     }
@@ -44,32 +44,40 @@ export default function BanglaManager() {
   const fields = activeTab === 'vowels' ? vowelFields : consonantFields
 
   const handleSave = async (formData) => {
-    if (editing) {
-      if (activeTab === 'vowels') {
-        await api.bangla.updateVowel(editing.id, formData)
+    try {
+      if (editing) {
+        if (activeTab === 'vowels') {
+          await api.bangla.updateVowel(editing.id, formData)
+        } else {
+          await api.bangla.updateConsonant(editing.id, formData)
+        }
       } else {
-        await api.bangla.updateConsonant(editing.id, formData)
+        if (activeTab === 'vowels') {
+          await api.bangla.createVowel(formData)
+        } else {
+          await api.bangla.createConsonant(formData)
+        }
       }
-    } else {
-      if (activeTab === 'vowels') {
-        await api.bangla.createVowel(formData)
-      } else {
-        await api.bangla.createConsonant(formData)
-      }
+      setShowForm(false)
+      setEditing(null)
+      await load()
+    } catch (err) {
+      console.error('Failed to save Bangla item:', err)
     }
-    setShowForm(false)
-    setEditing(null)
-    await load()
   }
 
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this item?')) return
-    if (activeTab === 'vowels') {
-      await api.bangla.deleteVowel(id)
-    } else {
-      await api.bangla.deleteConsonant(id)
+    try {
+      if (activeTab === 'vowels') {
+        await api.bangla.deleteVowel(id)
+      } else {
+        await api.bangla.deleteConsonant(id)
+      }
+      await load()
+    } catch (err) {
+      console.error('Failed to delete Bangla item:', err)
     }
-    await load()
   }
 
   const columns = [

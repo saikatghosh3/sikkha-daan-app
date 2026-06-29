@@ -38,7 +38,7 @@ export default function GeneralKnowledgeManager() {
     try {
       setItems(await api.generalKnowledge.getAll())
     } catch (err) {
-      alert('Failed to load: ' + err.message)
+      console.error('Failed to load GK data:', err)
     } finally {
       setLoading(false)
     }
@@ -47,20 +47,28 @@ export default function GeneralKnowledgeManager() {
   useEffect(() => { load() }, [load])
 
   const handleSave = async (formData) => {
-    if (editing) {
-      await api.generalKnowledge.update(editing.id, formData)
-    } else {
-      await api.generalKnowledge.create(formData)
+    try {
+      if (editing) {
+        await api.generalKnowledge.update(editing.id, formData)
+      } else {
+        await api.generalKnowledge.create(formData)
+      }
+      setShowForm(false)
+      setEditing(null)
+      await load()
+    } catch (err) {
+      console.error('Failed to save GK item:', err)
     }
-    setShowForm(false)
-    setEditing(null)
-    await load()
   }
 
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this item?')) return
-    await api.generalKnowledge.delete(id)
-    await load()
+    try {
+      await api.generalKnowledge.delete(id)
+      await load()
+    } catch (err) {
+      console.error('Failed to delete GK item:', err)
+    }
   }
 
   const categoryLabel = (val) => CATEGORIES.find(c => c.value === val)?.label || val

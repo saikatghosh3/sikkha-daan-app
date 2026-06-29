@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { api } from '../api/client'
+import { api, imgUrl } from '../api/client'
 import './LearningSection.css'
 
 const CATEGORY_CONFIG = [

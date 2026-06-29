@@ -19,7 +19,7 @@ export default function EnglishManager() {
     try {
       setItems(await api.english.getAll())
     } catch (err) {
-      alert('Failed to load: ' + err.message)
+      console.error('Failed to load English data:', err)
     } finally {
       setLoading(false)
     }
@@ -28,20 +28,28 @@ export default function EnglishManager() {
   useEffect(() => { load() }, [load])
 
   const handleSave = async (formData) => {
-    if (editing) {
-      await api.english.update(editing.id, formData)
-    } else {
-      await api.english.create(formData)
+    try {
+      if (editing) {
+        await api.english.update(editing.id, formData)
+      } else {
+        await api.english.create(formData)
+      }
+      setShowForm(false)
+      setEditing(null)
+      await load()
+    } catch (err) {
+      console.error('Failed to save English item:', err)
     }
-    setShowForm(false)
-    setEditing(null)
-    await load()
   }
 
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this item?')) return
-    await api.english.delete(id)
-    await load()
+    try {
+      await api.english.delete(id)
+      await load()
+    } catch (err) {
+      console.error('Failed to delete English item:', err)
+    }
   }
 
   const columns = [

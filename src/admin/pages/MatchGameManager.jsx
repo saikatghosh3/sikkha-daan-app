@@ -39,7 +39,7 @@ export default function MatchGameManager() {
     try {
       setItems(await api.matchGame.getAll())
     } catch (err) {
-      alert('Failed to load: ' + err.message)
+      console.error('Failed to load Match Game data:', err)
     } finally {
       setLoading(false)
     }
@@ -52,20 +52,28 @@ export default function MatchGameManager() {
   items.forEach(i => { groupCounts[i.mode] = (groupCounts[i.mode] || 0) + 1 })
 
   const handleSave = async (formData) => {
-    if (editing) {
-      await api.matchGame.update(editing.id, formData)
-    } else {
-      await api.matchGame.create(formData)
+    try {
+      if (editing) {
+        await api.matchGame.update(editing.id, formData)
+      } else {
+        await api.matchGame.create(formData)
+      }
+      setShowForm(false)
+      setEditing(null)
+      await load()
+    } catch (err) {
+      console.error('Failed to save Match Game item:', err)
     }
-    setShowForm(false)
-    setEditing(null)
-    await load()
   }
 
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this pair?')) return
-    await api.matchGame.delete(id)
-    await load()
+    try {
+      await api.matchGame.delete(id)
+      await load()
+    } catch (err) {
+      console.error('Failed to delete Match Game item:', err)
+    }
   }
 
   const handleEdit = (item) => {

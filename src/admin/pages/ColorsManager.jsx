@@ -21,7 +21,7 @@ export default function ColorsManager() {
     try {
       setItems(await api.colors.getAll())
     } catch (err) {
-      alert('Failed to load: ' + err.message)
+      console.error('Failed to load Colors data:', err)
     } finally {
       setLoading(false)
     }
@@ -30,20 +30,28 @@ export default function ColorsManager() {
   useEffect(() => { load() }, [load])
 
   const handleSave = async (formData) => {
-    if (editing) {
-      await api.colors.update(editing.id, formData)
-    } else {
-      await api.colors.create(formData)
+    try {
+      if (editing) {
+        await api.colors.update(editing.id, formData)
+      } else {
+        await api.colors.create(formData)
+      }
+      setShowForm(false)
+      setEditing(null)
+      await load()
+    } catch (err) {
+      console.error('Failed to save Colors item:', err)
     }
-    setShowForm(false)
-    setEditing(null)
-    await load()
   }
 
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this color?')) return
-    await api.colors.delete(id)
-    await load()
+    try {
+      await api.colors.delete(id)
+      await load()
+    } catch (err) {
+      console.error('Failed to delete Colors item:', err)
+    }
   }
 
   const columns = [

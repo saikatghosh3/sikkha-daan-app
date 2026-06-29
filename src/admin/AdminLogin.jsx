@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import { api } from '../api/client'
+
+const DEFAULT_EMAIL = 'admin@sikkhadaan.com'
+const DEFAULT_PASSWORD = 'admin123'
 
 export default function AdminLogin({ onLogin }) {
   const [email, setEmail] = useState('')
@@ -11,16 +13,14 @@ export default function AdminLogin({ onLogin }) {
     e.preventDefault()
     setError('')
     setLoading(true)
-    try {
-      const res = await api.auth.login(email, password)
-      if (res.success) {
-        onLogin(email)
-      }
-    } catch (err) {
-      setError(err.message || 'Login failed')
-    } finally {
-      setLoading(false)
+    // Simulate network delay for UX
+    await new Promise(r => setTimeout(r, 600))
+    if (email === DEFAULT_EMAIL && password === DEFAULT_PASSWORD) {
+      onLogin(email)
+    } else {
+      setError('Invalid email or password')
     }
+    setLoading(false)
   }
 
   return (

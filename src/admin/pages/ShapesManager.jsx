@@ -21,7 +21,7 @@ export default function ShapesManager() {
     try {
       setItems(await api.shapes.getAll())
     } catch (err) {
-      alert('Failed to load: ' + err.message)
+      console.error('Failed to load Shapes data:', err)
     } finally {
       setLoading(false)
     }
@@ -30,20 +30,28 @@ export default function ShapesManager() {
   useEffect(() => { load() }, [load])
 
   const handleSave = async (formData) => {
-    if (editing) {
-      await api.shapes.update(editing.id, formData)
-    } else {
-      await api.shapes.create(formData)
+    try {
+      if (editing) {
+        await api.shapes.update(editing.id, formData)
+      } else {
+        await api.shapes.create(formData)
+      }
+      setShowForm(false)
+      setEditing(null)
+      await load()
+    } catch (err) {
+      console.error('Failed to save Shapes item:', err)
     }
-    setShowForm(false)
-    setEditing(null)
-    await load()
   }
 
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this shape?')) return
-    await api.shapes.delete(id)
-    await load()
+    try {
+      await api.shapes.delete(id)
+      await load()
+    } catch (err) {
+      console.error('Failed to delete Shapes item:', err)
+    }
   }
 
   const columns = [

@@ -25,7 +25,7 @@ export default function NumbersManager() {
       setBangla(b)
       setEnglish(e)
     } catch (err) {
-      alert('Failed to load: ' + err.message)
+      console.error('Failed to load Numbers data:', err)
     } finally {
       setLoading(false)
     }
@@ -36,33 +36,41 @@ export default function NumbersManager() {
   const items = activeTab === 'bangla' ? bangla : english
 
   const handleSave = async (formData) => {
-    const ep = activeTab === 'bangla' ? api.numbers : api.numbers
-    if (editing) {
-      if (activeTab === 'bangla') {
-        await ep.updateBangla(editing.id, formData)
+    try {
+      const ep = activeTab === 'bangla' ? api.numbers : api.numbers
+      if (editing) {
+        if (activeTab === 'bangla') {
+          await ep.updateBangla(editing.id, formData)
+        } else {
+          await ep.updateEnglish(editing.id, formData)
+        }
       } else {
-        await ep.updateEnglish(editing.id, formData)
+        if (activeTab === 'bangla') {
+          await ep.createBangla(formData)
+        } else {
+          await ep.createEnglish(formData)
+        }
       }
-    } else {
-      if (activeTab === 'bangla') {
-        await ep.createBangla(formData)
-      } else {
-        await ep.createEnglish(formData)
-      }
+      setShowForm(false)
+      setEditing(null)
+      await load()
+    } catch (err) {
+      console.error('Failed to save Numbers item:', err)
     }
-    setShowForm(false)
-    setEditing(null)
-    await load()
   }
 
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this item?')) return
-    if (activeTab === 'bangla') {
-      await api.numbers.deleteBangla(id)
-    } else {
-      await api.numbers.deleteEnglish(id)
+    try {
+      if (activeTab === 'bangla') {
+        await api.numbers.deleteBangla(id)
+      } else {
+        await api.numbers.deleteEnglish(id)
+      }
+      await load()
+    } catch (err) {
+      console.error('Failed to delete Numbers item:', err)
     }
-    await load()
   }
 
   const columns = [

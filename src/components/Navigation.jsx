@@ -7,10 +7,10 @@ const NAV_ITEMS = [
   { key: 'english', label: 'ABC', sub: 'English' },
   { key: 'rhymes', label: 'ছড়া', sub: 'Rhymes' },
   { key: 'multiplication', label: 'নামতা', sub: 'Table' },
-  { key: 'match', label: '🎯', sub: 'Match' },
-  { key: 'shapes', label: '🔷', sub: 'Shapes' },
-  { key: 'colors', label: '🎨', sub: 'Colors' },
-  { key: 'generalknowledge', label: '🧠', sub: 'GK' },
+ { key: 'match', label: 'মিলকরণ', sub: 'Match' },
+  { key: 'shapes', label: 'আকৃতি', sub: 'Shapes' },
+  { key: 'colors', label: 'রং', sub: 'Colors' },
+  { key: 'generalknowledge', label: 'সাধারণ জ্ঞান', sub: 'GK' },
 ]
 
 export default function Navigation({ activeSection, setActiveSection }) {

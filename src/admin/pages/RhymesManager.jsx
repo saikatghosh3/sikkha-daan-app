@@ -23,7 +23,7 @@ export default function RhymesManager() {
       setBangla(b)
       setEnglish(e)
     } catch (err) {
-      alert('Failed to load: ' + err.message)
+      console.error('Failed to load Rhymes data:', err)
     } finally {
       setLoading(false)
     }
@@ -34,32 +34,40 @@ export default function RhymesManager() {
   const items = activeTab === 'bangla' ? bangla : english
 
   const handleSave = async (formData) => {
-    if (editing) {
-      if (activeTab === 'bangla') {
-        await api.rhymes.updateBangla(editing.id, formData)
+    try {
+      if (editing) {
+        if (activeTab === 'bangla') {
+          await api.rhymes.updateBangla(editing.id, formData)
+        } else {
+          await api.rhymes.updateEnglish(editing.id, formData)
+        }
       } else {
-        await api.rhymes.updateEnglish(editing.id, formData)
+        if (activeTab === 'bangla') {
+          await api.rhymes.createBangla(formData)
+        } else {
+          await api.rhymes.createEnglish(formData)
+        }
       }
-    } else {
-      if (activeTab === 'bangla') {
-        await api.rhymes.createBangla(formData)
-      } else {
-        await api.rhymes.createEnglish(formData)
-      }
+      setShowForm(false)
+      setEditing(null)
+      await load()
+    } catch (err) {
+      console.error('Failed to save Rhymes item:', err)
     }
-    setShowForm(false)
-    setEditing(null)
-    await load()
   }
 
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this rhyme?')) return
-    if (activeTab === 'bangla') {
-      await api.rhymes.deleteBangla(id)
-    } else {
-      await api.rhymes.deleteEnglish(id)
+    try {
+      if (activeTab === 'bangla') {
+        await api.rhymes.deleteBangla(id)
+      } else {
+        await api.rhymes.deleteEnglish(id)
+      }
+      await load()
+    } catch (err) {
+      console.error('Failed to delete Rhymes item:', err)
     }
-    await load()
   }
 
   return (
