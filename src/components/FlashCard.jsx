@@ -25,7 +25,7 @@ export default function FlashCard({ items, title, categoryColor }) {
       }, 2500)
     }
     return () => clearInterval(timerRef.current)
-  }, [autoPlay, items.length])
+  }, [autoPlay, items.length, currentIndex])
 
   useEffect(() => {
     setLoaded(false)
@@ -56,8 +56,8 @@ export default function FlashCard({ items, title, categoryColor }) {
   }, [items.length])
 
   const toggleAuto = () => {
+    clearInterval(timerRef.current)
     setAutoPlay(prev => !prev)
-    if (autoPlay) clearInterval(timerRef.current)
   }
 
   if (!items.length) return null

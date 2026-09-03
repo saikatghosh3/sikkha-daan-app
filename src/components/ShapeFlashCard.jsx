@@ -15,7 +15,7 @@ export default function ShapeFlashCard({ items, title }) {
       }, 2500)
     }
     return () => clearInterval(timerRef.current)
-  }, [autoPlay, items.length])
+  }, [autoPlay, items.length, currentIndex])
 
   const handleNext = useCallback(() => {
     setCurrentIndex(prev => (prev + 1) % items.length)
@@ -26,8 +26,8 @@ export default function ShapeFlashCard({ items, title }) {
   }, [items.length])
 
   const toggleAuto = () => {
+    clearInterval(timerRef.current)
     setAutoPlay(prev => !prev)
-    if (autoPlay) clearInterval(timerRef.current)
   }
 
   if (!items.length) return null

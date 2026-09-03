@@ -82,7 +82,7 @@ export default function GeneralKnowledgeSection() {
       }, 3500)
     }
     return () => clearInterval(timerRef.current)
-  }, [autoPlay, data.length])
+  }, [autoPlay, data.length, currentIndex])
 
   const handleNext = useCallback(() => {
     setCurrentIndex(prev => (prev + 1) % data.length)
@@ -93,8 +93,8 @@ export default function GeneralKnowledgeSection() {
   }, [data.length])
 
   const toggleAuto = () => {
+    clearInterval(timerRef.current)
     setAutoPlay(prev => !prev)
-    if (autoPlay) clearInterval(timerRef.current)
   }
 
   const progress = data.length > 0 ? ((currentIndex + 1) / data.length) * 100 : 0
