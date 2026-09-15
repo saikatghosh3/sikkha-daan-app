@@ -19,6 +19,10 @@ export default function FlashCard({ items, title, categoryColor }) {
   const currentItem = items[currentIndex] || {}
 
   useEffect(() => {
+    items.forEach(item => { if (item?.image) preloadImg(item.image) })
+  }, [items])
+
+  useEffect(() => {
     if (autoPlay) {
       timerRef.current = setInterval(() => {
         setCurrentIndex(prev => (prev + 1) % items.length)
@@ -28,24 +32,19 @@ export default function FlashCard({ items, title, categoryColor }) {
   }, [autoPlay, items.length, currentIndex])
 
   useEffect(() => {
-    setLoaded(false)
     if (currentItem.image) {
-      preloadImg(currentItem.image)
-      const img = new Image()
-      img.onload = () => setLoaded(true)
-      img.src = currentItem.image
+      if (imgCache.has(currentItem.image)) {
+        setLoaded(true)
+      } else {
+        setLoaded(false)
+        const img = new Image()
+        img.onload = () => setLoaded(true)
+        img.src = currentItem.image
+      }
     } else {
       setLoaded(true)
     }
   }, [currentIndex, currentItem.image])
-
-  useEffect(() => {
-    if (items.length > 1) {
-      const nextIdx = (currentIndex + 1) % items.length
-      const nextItem = items[nextIdx]
-      if (nextItem?.image) preloadImg(nextItem.image)
-    }
-  }, [currentIndex, items])
 
   const handleNext = useCallback(() => {
     setCurrentIndex(prev => (prev + 1) % items.length)
@@ -89,7 +88,7 @@ export default function FlashCard({ items, title, categoryColor }) {
 
         {currentItem.image && (
           <div className="learn-image-wrap">
-            <img src={currentItem.image} alt="" className="learn-image" loading="lazy" />
+            <img src={currentItem.image} alt="" className="learn-image" />
           </div>
         )}
 

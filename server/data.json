@@ -780,16 +780,30 @@
     {
       "id": 6,
       "title": "ভোর হলো দোর খোলো",
-      "text": "ভোর হলো দোর খোলো,\nখুকুমণি ওঠো রে।\nঐ ডাকে জুঁই শাখে,\nফুলখুকি ছোট রে।",
+      "text": "ভোর হলো দোর খোলো,\nখুকুমণি ওঠো রে।\nঐ ডাকে জুঁই শাখে,\nফুলখুকি ছোট রে।\nখুলি হাল তুলি পাল\nঐ তরী চললো,\nএই বার এই বার\nখুকু চোখ খুললো।\nআলসে নয় সে\nওঠে রোজ সকালে,\nরোজ তাই চাঁদা ভাই\nটিপ দেয় কপালে।",
       "image": "/img/bhor.png",
       "sort_order": 5
     },
     {
       "id": 7,
       "title": "তাই তাই তাই",
-      "text": "তাই তাই তাই,\nমামার বাড়ি যাই।\nমামা দিল দুধ ভাত,\nদুয়ারে বসে খাই।\nমামি এল লাঠি নিয়ে,\nপালাই পালাই।",
+      "text": "তাই তাই তাই,\nমামার বাড়ি যাই।\nমামা দিল দুধ ভাত,\nদুয়ারে বসে খাই।\nমামি এল লাঠি নিয়ে,\nপালাই পালাই।",
       "image": "/img/tai.png",
       "sort_order": 6
+    },
+    {
+      "id": 8,
+      "title": "কাণাবোগীর ছা",
+      "text": "ঐ দেখা যায় তাল গাছ,\nঐ আমাদের গাঁ,\nঐখানে বাস করে\nকাণাবোগীর ছা।\n\nও বগী তুই খাস কী?\nপান্তা ভাত চাস কী?\nপান্তা আমি খাই না,\nপুঁটি মাছ পাই না,\nএকটা যদি পাই\nঅমনি ধরে\nগাপুস গুপুস খাই!",
+      "image": "/img/kanabogi.jpg",
+      "sort_order": 7
+    },
+    {
+      "id": 9,
+      "title": "আয় ছেলেরা আয় মেয়েরা",
+      "text": "আয় ছেলেরা, আয় মেয়েরা\nফুল তুলিতে যাই,\nফুলের মালা গলায় দিয়ে\nমামার বাড়ি যাই।\n\nঝড়ের দিনে মামার দেশে\nআম কুড়াতে সুখ,\nপাকা জামের মধুর রসে\nরঙিন করি মুখ।",
+      "image": "/img/mamabari.jpg",
+      "sort_order": 8
     }
   ],
   "english_rhymes": [
@@ -841,6 +855,13 @@
       "text": "Jack and Jill went up the hill,\nTo fetch a pail of water.\nJack fell down and broke his crown,\nAnd Jill came tumbling after.",
       "image": "/img/jack_jill.png",
       "sort_order": 6
+    },
+    {
+      "id": 8,
+      "title": "Two Little Blackbirds",
+      "text": "Two little blackbirds sitting on a wall,\nOne named Peter, one named Paul.\nFly away Peter, fly away Paul,\nCome back Peter, come back Paul!",
+      "image": "/img/peterandpoul.jpg",
+      "sort_order": 7
     }
   ],
   "match_game_pairs": [

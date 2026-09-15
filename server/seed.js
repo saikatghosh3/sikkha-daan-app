@@ -1,4 +1,4 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 
 const DB_PATH = path.join(__dirname, 'data.json');
@@ -118,8 +118,10 @@ const data = {
     { id: 3, title: 'আতা গাছে তোতা পাখি', text: 'আতা গাছে তোতা পাখি,\nডালিম গাছে মৌ।\nএত ডাকি তবু কথা,\nকও না কেন বউ?', image: '/img/tota.png', sort_order: 2 },
     { id: 4, title: 'হাট্টিমা টিম টিম', text: 'হাট্টিমা টিম টিম,\nতারা মাঠে পাড়ে ডিম।\nতাদের খাড়া দুটো শিং,\nতারা হাট্টিমা টিম টিম।', image: '/img/hattima.png', sort_order: 3 },
     { id: 5, title: 'খোকন খোকন ডাক পাড়ি', text: 'খোকন খোকন ডাক পাড়ি,\nখোকন মোদের কার বাড়ি?\nআয় রে খোকন ঘরে আয়,\nদুধ-মাখা ভাত কাকে খায়।', image: '/img/khokon.png', sort_order: 4 },
-    { id: 6, title: 'ভোর হলো দোর খোলো', text: 'ভোর হলো দোর খোলো,\nখুকুমণি ওঠো রে।\nঐ ডাকে জুঁই শাখে,\nফুলখুকি ছোট রে।', image: '/img/bhor.png', sort_order: 5 },
+    { id: 6, title: 'ভোর হলো দোর খোলো', text: 'ভোর হলো দোর খোলো,\nখুকুমণি ওঠো রে।\nঐ ডাকে জুঁই শাখে,\nফুলখুকি ছোট রে।\nখুলি হাল তুলি পাল\nঐ তরী চললো,\nএই বার এই বার\nখুকু চোখ খুললো।\nআলসে নয় সে\nওঠে রোজ সকালে,\nরোজ তাই চাঁদা ভাই\nটিপ দেয় কপালে।', image: '/img/bhor.png', sort_order: 5 },
     { id: 7, title: 'তাই তাই তাই', text: 'তাই তাই তাই,\nমামার বাড়ি যাই।\nমামা দিল দুধ ভাত,\nদুয়ারে বসে খাই।\nমামি এল লাঠি নিয়ে,\nপালাই পালাই।', image: '/img/tai.png', sort_order: 6 },
+    { id: 8, title: 'কাণাবোগীর ছা', text: 'ঐ দেখা যায় তাল গাছ,\nঐ আমাদের গাঁ,\nঐখানে বাস করে\nকাণাবোগীর ছা।\n\nও বগী তুই খাস কী?\nপান্তা ভাত চাস কী?\nপান্তা আমি খাই না,\nপুঁটি মাছ পাই না,\nএকটা যদি পাই\nঅমনি ধরে\nগাপুস গুপুস খাই!', image: '/img/kanabogi.jpg', sort_order: 7 },
+    { id: 9, title: 'আয় ছেলেরা, আয় মেয়েরা', text: 'আয় ছেলেরা, আয় মেয়েরা\nফুল তুলিতে যাই,\nফুলের মালা গলায় দিয়ে\nমামার বাড়ি যাই।\n\nঝড়ের দিনে মামার দেশে\nআম কুড়াতে সুখ,\nপাকা জামের মধুর রসে\nরঙিন করি মুখ।', image: '/img/mamabari.jpg', sort_order: 8 },
   ],
   english_rhymes: [
     { id: 1, title: 'Twinkle Twinkle Little Star', text: 'Twinkle, twinkle, little star,\nHow I wonder what you are!\nUp above the world so high,\nLike a diamond in the sky.', image: '/img/star.png', sort_order: 0 },
@@ -129,6 +131,7 @@ const data = {
     { id: 5, title: 'Incy Wincy Spider', text: 'The incy wincy spider climbed up the waterspout.\nDown came the rain and washed the spider out.\nOut came the sun and dried up all the rain,\nAnd the incy wincy spider climbed up the spout again.', image: '/img/spider.png', sort_order: 4 },
     { id: 6, title: 'Rain, Rain, Go Away', text: 'Rain, rain, go away,\nCome again another day.\nLittle Johnny wants to play,\nRain, rain, go away.', image: '/img/rain_go.png', sort_order: 5 },
     { id: 7, title: 'Jack and Jill', text: 'Jack and Jill went up the hill,\nTo fetch a pail of water.\nJack fell down and broke his crown,\nAnd Jill came tumbling after.', image: '/img/jack_jill.png', sort_order: 6 },
+    { id: 8, title: 'Two Little Blackbirds', text: 'Two little blackbirds sitting on a wall,\nOne named Peter, one named Paul.\nFly away Peter, fly away Paul,\nCome back Peter, come back Paul!', image: '/img/peterandpoul.jpg', sort_order: 7 },
   ],
   match_game_pairs: [
     { id: 1, mode: 'english', left_value: 'A', right_value: 'Apple', sort_order: 0 },
