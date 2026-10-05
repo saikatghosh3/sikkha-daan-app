@@ -1,83 +1,59 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useEffect, useMemo } from 'react'
+import useFlashCardNav from '../hooks/useFlashCardNav'
+import useImageReady, { preloadImage } from '../hooks/useImageReady'
 import './LearningSection.css'
 
-const imgCache = new Set()
-
-function preloadImg(src) {
-  if (!src || imgCache.has(src)) return
-  imgCache.add(src)
-  const img = new Image()
-  img.src = src
-}
+const NO_ITEMS = []
 
 export default function FlashCard({ items, title, categoryColor }) {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [autoPlay, setAutoPlay] = useState(false)
-  const [loaded, setLoaded] = useState(false)
-  const timerRef = useRef(null)
+  const list = useMemo(() => (Array.isArray(items) ? items : NO_ITEMS), [items])
 
-  const currentItem = items[currentIndex] || {}
+  const {
+    index: currentIndex,
+    total,
+    isNavigating,
+    autoPlay,
+    goNext,
+    goPrev,
+    goTo,
+    toggleAutoPlay,
+    handleKeyDown,
+  } = useFlashCardNav(list.length, 2500)
 
-  useEffect(() => {
-    items.forEach(item => { if (item?.image) preloadImg(item.image) })
-  }, [items])
-
-  useEffect(() => {
-    if (autoPlay) {
-      timerRef.current = setInterval(() => {
-        setCurrentIndex(prev => (prev + 1) % items.length)
-      }, 2500)
-    }
-    return () => clearInterval(timerRef.current)
-  }, [autoPlay, items.length, currentIndex])
+  const currentItem = list[currentIndex] || {}
+  const imageReady = useImageReady(currentItem.image)
 
   useEffect(() => {
-    if (currentItem.image) {
-      if (imgCache.has(currentItem.image)) {
-        setLoaded(true)
-      } else {
-        setLoaded(false)
-        const img = new Image()
-        img.onload = () => setLoaded(true)
-        img.src = currentItem.image
-      }
-    } else {
-      setLoaded(true)
-    }
-  }, [currentIndex, currentItem.image])
+    list.forEach(item => {
+      if (item?.image) preloadImage(item.image)
+    })
+  }, [list])
 
-  const handleNext = useCallback(() => {
-    setCurrentIndex(prev => (prev + 1) % items.length)
-  }, [items.length])
+  if (!total) return null
 
-  const handlePrev = useCallback(() => {
-    setCurrentIndex(prev => (prev - 1 + items.length) % items.length)
-  }, [items.length])
-
-  const toggleAuto = () => {
-    clearInterval(timerRef.current)
-    setAutoPlay(prev => !prev)
-  }
-
-  if (!items.length) return null
-
-  const progress = ((currentIndex + 1) / items.length) * 100
+  const progress = ((currentIndex + 1) / total) * 100
 
   return (
-    <div className="learn-section">
+    <div className="learn-section" tabIndex={-1} onKeyDown={handleKeyDown}>
       <div className="learn-section-header">
         <h2 className="learn-section-title">{title}</h2>
-        <p className="learn-section-subtitle">{items.length} items</p>
+        <p className="learn-section-subtitle">{total} items</p>
       </div>
 
       <div className="learn-progress">
         <div className="learn-progress-bar">
           <div className="learn-progress-fill" style={{ width: `${progress}%`, background: categoryColor }} />
         </div>
-        <span className="learn-progress-text">{currentIndex + 1}/{items.length}</span>
+        <span className="learn-progress-text">{currentIndex + 1}/{total}</span>
       </div>
 
-      <div className={`learn-card ${loaded ? 'loaded' : ''}`} key={currentIndex}>
+      <div
+        className={`learn-card ${imageReady ? 'loaded' : ''}`}
+        key={currentIndex}
+        role="group"
+        aria-roledescription="carousel"
+        aria-label={title}
+      >
         {currentItem.character && (
           <div className="learn-character">{currentItem.character}</div>
         )}
@@ -88,7 +64,7 @@ export default function FlashCard({ items, title, categoryColor }) {
 
         {currentItem.image && (
           <div className="learn-image-wrap">
-            <img src={currentItem.image} alt="" className="learn-image" />
+            <img src={currentItem.image} alt={currentItem.name || ''} className="learn-image" />
           </div>
         )}
 
@@ -101,24 +77,42 @@ export default function FlashCard({ items, title, categoryColor }) {
         )}
       </div>
 
-      <div className="learn-controls">
-        <button className="learn-btn learn-btn-prev" onClick={handlePrev}>
+      <div className={`learn-controls ${isNavigating ? 'is-busy' : ''}`}>
+        <button
+          type="button"
+          className="learn-btn learn-btn-prev"
+          onClick={goPrev}
+          aria-label="Previous item"
+        >
           ← Prev
         </button>
-        <button className={`learn-btn learn-btn-auto ${autoPlay ? 'playing' : ''}`} onClick={toggleAuto}>
+        <button
+          type="button"
+          className={`learn-btn learn-btn-auto ${autoPlay ? 'playing' : ''}`}
+          onClick={toggleAutoPlay}
+          aria-pressed={autoPlay}
+        >
           {autoPlay ? '⏹ Stop' : '▶ Auto'}
         </button>
-        <button className="learn-btn learn-btn-next" onClick={handleNext}>
+        <button
+          type="button"
+          className="learn-btn learn-btn-next"
+          onClick={goNext}
+          aria-label="Next item"
+        >
           Next →
         </button>
       </div>
 
       <div className="learn-dots">
-        {items.map((_, idx) => (
+        {list.map((item, idx) => (
           <button
-            key={idx}
+            type="button"
+            key={item.character ?? item.name ?? idx}
             className={`learn-dot ${idx === currentIndex ? 'active' : ''}`}
-            onClick={() => setCurrentIndex(idx)}
+            onClick={() => goTo(idx)}
+            aria-label={`Go to item ${idx + 1}`}
+            aria-current={idx === currentIndex}
             style={idx === currentIndex ? { background: categoryColor } : {}}
           />
         ))}

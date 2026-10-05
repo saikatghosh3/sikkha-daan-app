@@ -1,5 +1,6 @@
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect } from "react"
 import { api } from '../api/client'
+import useFlashCardNav from '../hooks/useFlashCardNav'
 import './LearningSection.css'
 
 const TAB_COLORS = {
@@ -45,9 +46,23 @@ export default function RhymesSection() {
   const [bangla, setBangla] = useState(STATIC_BANGLA)
   const [english, setEnglish] = useState(STATIC_ENGLISH)
   const [activeTab, setActiveTab] = useState('bangla')
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [autoPlay, setAutoPlay] = useState(false)
-  const timerRef = useRef(null)
+
+  const {
+    index: currentIndex,
+    total,
+    isNavigating,
+    autoPlay,
+    goNext,
+    goPrev,
+    goTo,
+    reset,
+    stopAutoPlay,
+    toggleAutoPlay,
+    handleKeyDown,
+  } = useFlashCardNav(
+    activeTab === 'bangla' ? bangla.length : english.length,
+    4000,
+  )
 
   useEffect(() => {
     Promise.all([api.rhymes.getBangla(), api.rhymes.getEnglish()])
@@ -59,37 +74,18 @@ export default function RhymesSection() {
   const colors = TAB_COLORS[activeTab]
   const current = data[currentIndex] || {}
 
-  useEffect(() => {
-    setCurrentIndex(0)
-  }, [activeTab])
-
-  useEffect(() => {
-    if (autoPlay && data.length > 0) {
-      timerRef.current = setInterval(() => {
-        setCurrentIndex(prev => (prev + 1) % data.length)
-      }, 4000)
-    }
-    return () => clearInterval(timerRef.current)
-  }, [autoPlay, data.length, currentIndex])
-
-  const handleNext = useCallback(() => {
-    setCurrentIndex(prev => (prev + 1) % data.length)
-  }, [data.length])
-
-  const handlePrev = useCallback(() => {
-    setCurrentIndex(prev => (prev - 1 + data.length) % data.length)
-  }, [data.length])
-
-  const toggleAuto = () => {
-    clearInterval(timerRef.current)
-    setAutoPlay(prev => !prev)
+  const switchTab = (tab) => {
+    if (tab === activeTab) return
+    stopAutoPlay()
+    reset()
+    setActiveTab(tab)
   }
 
-  const progress = data.length > 0 ? ((currentIndex + 1) / data.length) * 100 : 0
+  const progress = total > 0 ? ((currentIndex + 1) / total) * 100 : 0
   const bgGradient = BG_GRADIENTS[currentIndex % BG_GRADIENTS.length]
 
   return (
-    <div className="learn-rhymes-section">
+    <div className="learn-rhymes-section" tabIndex={-1} onKeyDown={handleKeyDown}>
       <div className="learn-section-header">
         <h2 className="learn-section-title">
           {activeTab === 'bangla' ? 'বাংলা ছড়া' : 'English Rhymes'}
@@ -100,7 +96,7 @@ export default function RhymesSection() {
       <div className="learn-tabs">
         <button
           className={`learn-tab ${activeTab === 'bangla' ? 'active' : ''}`}
-          onClick={() => setActiveTab('bangla')}
+          onClick={() => switchTab('bangla')}
         >
           <span className="learn-tab-icon">🅱️</span>
           <span>বাংলা</span>
@@ -108,7 +104,7 @@ export default function RhymesSection() {
         </button>
         <button
           className={`learn-tab ${activeTab === 'english' ? 'active' : ''}`}
-          onClick={() => setActiveTab('english')}
+          onClick={() => switchTab('english')}
         >
           <span className="learn-tab-icon">🔤</span>
           <span>English</span>
@@ -133,6 +129,9 @@ export default function RhymesSection() {
           <div
             className="learn-rhyme-card"
             key={`${activeTab}-${currentIndex}`}
+            role="group"
+            aria-roledescription="carousel"
+            aria-label={activeTab === 'bangla' ? 'বাংলা ছড়া' : 'English Rhymes'}
             style={{
               background: current.image
                 ? `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${current.image}) center/cover no-repeat`
@@ -147,14 +146,29 @@ export default function RhymesSection() {
             <span className="learn-rhyme-number">Rhyme {currentIndex + 1} of {data.length}</span>
           </div>
 
-          <div className="learn-controls">
-            <button className="learn-btn learn-btn-prev" onClick={handlePrev}>
+          <div className={`learn-controls ${isNavigating ? 'is-busy' : ''}`}>
+            <button
+              type="button"
+              className="learn-btn learn-btn-prev"
+              onClick={goPrev}
+              aria-label="Previous item"
+            >
               ← Previous
             </button>
-            <button className={`learn-btn learn-btn-auto ${autoPlay ? 'playing' : ''}`} onClick={toggleAuto}>
+            <button
+              type="button"
+              className={`learn-btn learn-btn-auto ${autoPlay ? 'playing' : ''}`}
+              onClick={toggleAutoPlay}
+              aria-pressed={autoPlay}
+            >
               {autoPlay ? '⏹ Stop' : '▶ Auto'}
             </button>
-            <button className="learn-btn learn-btn-next" onClick={handleNext}>
+            <button
+              type="button"
+              className="learn-btn learn-btn-next"
+              onClick={goNext}
+              aria-label="Next item"
+            >
               Next →
             </button>
           </div>
@@ -162,9 +176,12 @@ export default function RhymesSection() {
           <div className="learn-dots">
             {data.map((_, idx) => (
               <button
+                type="button"
                 key={idx}
                 className={`learn-dot ${idx === currentIndex ? 'active' : ''}`}
-                onClick={() => setCurrentIndex(idx)}
+                onClick={() => goTo(idx)}
+                aria-label={`Go to item ${idx + 1}`}
+                aria-current={idx === currentIndex}
                 style={idx === currentIndex ? { background: colors.primary } : {}}
               />
             ))}

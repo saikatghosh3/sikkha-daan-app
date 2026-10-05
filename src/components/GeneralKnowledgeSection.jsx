@@ -1,5 +1,6 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { api, imgUrl } from '../api/client'
+import useFlashCardNav from '../hooks/useFlashCardNav'
 import './LearningSection.css'
 
 const CATEGORY_CONFIG = [
@@ -51,57 +52,50 @@ const STATIC_GK_ITEMS = [
 export default function GeneralKnowledgeSection() {
   const [items, setItems] = useState(STATIC_GK_ITEMS)
   const [activeCat, setActiveCat] = useState('national')
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [autoPlay, setAutoPlay] = useState(false)
-  const timerRef = useRef(null)
+
+  const data = items.filter(i => i.category === activeCat)
+
+  const {
+    index: currentIndex,
+    total,
+    isNavigating,
+    autoPlay,
+    goNext,
+    goPrev,
+    goTo,
+    reset,
+    stopAutoPlay,
+    toggleAutoPlay,
+    handleKeyDown,
+  } = useFlashCardNav(data.length, 3500)
 
   useEffect(() => {
     api.generalKnowledge.getAll()
-      .then(data => {
-        if (data.length) {
+      .then(fetched => {
+        if (fetched.length) {
           const existingIds = new Set(STATIC_GK_ITEMS.map(i => i.id))
-          const merged = [...STATIC_GK_ITEMS, ...data.filter(i => !existingIds.has(i.id))]
+          const merged = [...STATIC_GK_ITEMS, ...fetched.filter(i => !existingIds.has(i.id))]
           setItems(merged)
         }
       })
       .catch(() => {})
   }, [])
 
-  const data = items.filter(i => i.category === activeCat)
   const catConfig = CATEGORY_CONFIG.find(c => c.value === activeCat) || CATEGORY_CONFIG[0]
   const current = data[currentIndex] || {}
 
-  useEffect(() => {
-    setCurrentIndex(0)
-  }, [activeCat])
-
-  useEffect(() => {
-    if (autoPlay && data.length > 1) {
-      timerRef.current = setInterval(() => {
-        setCurrentIndex(prev => (prev + 1) % data.length)
-      }, 3500)
-    }
-    return () => clearInterval(timerRef.current)
-  }, [autoPlay, data.length, currentIndex])
-
-  const handleNext = useCallback(() => {
-    setCurrentIndex(prev => (prev + 1) % data.length)
-  }, [data.length])
-
-  const handlePrev = useCallback(() => {
-    setCurrentIndex(prev => (prev - 1 + data.length) % data.length)
-  }, [data.length])
-
-  const toggleAuto = () => {
-    clearInterval(timerRef.current)
-    setAutoPlay(prev => !prev)
+  const switchCategory = (category) => {
+    if (category === activeCat) return
+    stopAutoPlay()
+    reset()
+    setActiveCat(category)
   }
 
-  const progress = data.length > 0 ? ((currentIndex + 1) / data.length) * 100 : 0
+  const progress = total > 0 ? ((currentIndex + 1) / total) * 100 : 0
   const bgGradient = BG_GRADIENTS[currentIndex % BG_GRADIENTS.length]
 
   return (
-    <div className="learn-section">
+    <div className="learn-section" tabIndex={-1} onKeyDown={handleKeyDown}>
       <div className="learn-section-header">
         <h2 className="learn-section-title">General Knowledge</h2>
         <p className="learn-section-subtitle">Learn about Bangladesh</p>
@@ -112,7 +106,7 @@ export default function GeneralKnowledgeSection() {
           <button
             key={cat.value}
             className={`learn-tab ${activeCat === cat.value ? 'active' : ''}`}
-            onClick={() => setActiveCat(cat.value)}
+            onClick={() => switchCategory(cat.value)}
           >
             <span className="learn-tab-icon">{cat.icon}</span>
             <span>{cat.label}</span>
@@ -138,6 +132,9 @@ export default function GeneralKnowledgeSection() {
           <div
             className="learn-card gk-card"
             key={`${activeCat}-${currentIndex}`}
+            role="group"
+            aria-roledescription="carousel"
+            aria-label={`${catConfig.label} fact`}
             style={{
               background: current.image
                 ? `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${current.image}) center/cover no-repeat`
@@ -166,24 +163,42 @@ export default function GeneralKnowledgeSection() {
             )}
           </div>
 
-          <div className="learn-controls">
-            <button className="learn-btn learn-btn-prev" onClick={handlePrev}>
+          <div className={`learn-controls ${isNavigating ? 'is-busy' : ''}`}>
+            <button
+              type="button"
+              className="learn-btn learn-btn-prev"
+              onClick={goPrev}
+              aria-label="Previous item"
+            >
               ← Previous
             </button>
-            <button className={`learn-btn learn-btn-auto ${autoPlay ? 'playing' : ''}`} onClick={toggleAuto}>
+            <button
+              type="button"
+              className={`learn-btn learn-btn-auto ${autoPlay ? 'playing' : ''}`}
+              onClick={toggleAutoPlay}
+              aria-pressed={autoPlay}
+            >
               {autoPlay ? '⏹ Stop' : '▶ Auto'}
             </button>
-            <button className="learn-btn learn-btn-next" onClick={handleNext}>
+            <button
+              type="button"
+              className="learn-btn learn-btn-next"
+              onClick={goNext}
+              aria-label="Next item"
+            >
               Next →
             </button>
           </div>
 
           <div className="learn-dots">
-            {data.map((_, idx) => (
+            {data.map((item, idx) => (
               <button
-                key={idx}
+                type="button"
+                key={item.id ?? idx}
                 className={`learn-dot ${idx === currentIndex ? 'active' : ''}`}
-                onClick={() => setCurrentIndex(idx)}
+                onClick={() => goTo(idx)}
+                aria-label={`Go to item ${idx + 1}`}
+                aria-current={idx === currentIndex}
                 style={idx === currentIndex ? { background: '#6366f1' } : {}}
               />
             ))}

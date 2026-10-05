@@ -398,6 +398,28 @@
   display: block;
 }
 
+/* ---- Press behaviour ----
+   `touch-action: manipulation` stops a fast tap on these controls from being
+   claimed by double-tap-zoom, which otherwise lets the browser dispatch a
+   second click for the same finger contact and skip an item. */
+.learn-btn,
+.learn-dot,
+.learn-tab {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.learn-btn:focus-visible,
+.learn-dot:focus-visible,
+.learn-tab:focus-visible,
+.learn-section:focus-visible,
+.learn-rhymes-section:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.75);
+  outline-offset: 2px;
+}
+
 /* ---- Controls ---- */
 .learn-controls {
   display: flex;
@@ -405,6 +427,11 @@
   justify-content: center;
   gap: 12px;
   margin-top: 20px;
+  transition: opacity 0.15s ease;
+}
+
+.learn-controls.is-busy {
+  opacity: 0.85;
 }
 
 .learn-btn {
@@ -419,7 +446,7 @@
   font-weight: 700;
   font-family: inherit;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease;
   min-width: 100px;
 }
 
@@ -464,6 +491,21 @@
   color: #fca5a5;
 }
 
+/* Pressed state is declared after the hover rules so it wins on specificity
+   ties - a tap must read as a press, not as a hover nudge. */
+.learn-btn-prev:active {
+  transform: translateX(-2px) scale(0.96);
+}
+
+.learn-btn-next:active {
+  transform: translateX(2px) scale(0.96);
+  box-shadow: 0 3px 10px rgba(99, 102, 241, 0.3);
+}
+
+.learn-btn-auto:active {
+  transform: scale(0.96);
+}
+
 /* ---- Dots ---- */
 .learn-dots {
   display: flex;
@@ -492,6 +534,10 @@
   width: 28px;
   border-radius: 5px;
   background: #6366f1;
+}
+
+.learn-dot:active {
+  transform: scale(0.8);
 }
 
 /* ---- Empty State ---- */

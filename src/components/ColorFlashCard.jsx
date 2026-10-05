@@ -1,54 +1,48 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import useFlashCardNav from '../hooks/useFlashCardNav'
 import './LearningSection.css'
 
 export default function ColorFlashCard({ items, title }) {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [autoPlay, setAutoPlay] = useState(false)
-  const timerRef = useRef(null)
+  const list = Array.isArray(items) ? items : []
 
-  const currentItem = items[currentIndex] || {}
+  const {
+    index: currentIndex,
+    total,
+    isNavigating,
+    autoPlay,
+    goNext,
+    goPrev,
+    goTo,
+    toggleAutoPlay,
+    handleKeyDown,
+  } = useFlashCardNav(list.length, 2500)
 
-  useEffect(() => {
-    if (autoPlay) {
-      timerRef.current = setInterval(() => {
-        setCurrentIndex(prev => (prev + 1) % items.length)
-      }, 2500)
-    }
-    return () => clearInterval(timerRef.current)
-  }, [autoPlay, items.length, currentIndex])
+  if (!total) return null
 
-  const handleNext = useCallback(() => {
-    setCurrentIndex(prev => (prev + 1) % items.length)
-  }, [items.length])
-
-  const handlePrev = useCallback(() => {
-    setCurrentIndex(prev => (prev - 1 + items.length) % items.length)
-  }, [items.length])
-
-  const toggleAuto = () => {
-    clearInterval(timerRef.current)
-    setAutoPlay(prev => !prev)
-  }
-
-  if (!items.length) return null
-
-  const progress = ((currentIndex + 1) / items.length) * 100
+  const currentItem = list[currentIndex] || {}
+  const progress = ((currentIndex + 1) / total) * 100
 
   return (
-    <div className="learn-section">
+    <div className="learn-section" tabIndex={-1} onKeyDown={handleKeyDown}>
       <div className="learn-section-header">
         <h2 className="learn-section-title">{title}</h2>
-        <p className="learn-section-subtitle">{items.length} colors</p>
+        <p className="learn-section-subtitle">{total} colors</p>
       </div>
 
       <div className="learn-progress">
         <div className="learn-progress-bar">
           <div className="learn-progress-fill" style={{ width: `${progress}%` }} />
         </div>
-        <span className="learn-progress-text">{currentIndex + 1}/{items.length}</span>
+        <span className="learn-progress-text">{currentIndex + 1}/{total}</span>
       </div>
 
-      <div className="learn-color-card" key={currentIndex} style={{ background: currentItem.color }}>
+      <div
+        className="learn-color-card"
+        key={currentIndex}
+        role="group"
+        aria-roledescription="carousel"
+        aria-label={title}
+        style={{ background: currentItem.color }}
+      >
         <div className="learn-color-swatch" style={{ background: 'rgba(255,255,255,0.25)' }} />
         <h3 className="learn-color-name">{currentItem.name_en || currentItem.nameEn}</h3>
         <p className="learn-color-name-bn">{currentItem.name_bn || currentItem.nameBn}</p>
@@ -57,20 +51,42 @@ export default function ColorFlashCard({ items, title }) {
         )}
       </div>
 
-      <div className="learn-controls">
-        <button className="learn-btn learn-btn-prev" onClick={handlePrev}>← Prev</button>
-        <button className={`learn-btn learn-btn-auto ${autoPlay ? 'playing' : ''}`} onClick={toggleAuto}>
+      <div className={`learn-controls ${isNavigating ? 'is-busy' : ''}`}>
+        <button
+          type="button"
+          className="learn-btn learn-btn-prev"
+          onClick={goPrev}
+          aria-label="Previous item"
+        >
+          ← Prev
+        </button>
+        <button
+          type="button"
+          className={`learn-btn learn-btn-auto ${autoPlay ? 'playing' : ''}`}
+          onClick={toggleAutoPlay}
+          aria-pressed={autoPlay}
+        >
           {autoPlay ? '⏹ Stop' : '▶ Auto'}
         </button>
-        <button className="learn-btn learn-btn-next" onClick={handleNext}>Next →</button>
+        <button
+          type="button"
+          className="learn-btn learn-btn-next"
+          onClick={goNext}
+          aria-label="Next item"
+        >
+          Next →
+        </button>
       </div>
 
       <div className="learn-dots">
-        {items.map((_, idx) => (
+        {list.map((item, idx) => (
           <button
-            key={idx}
+            type="button"
+            key={item.id ?? item.name_en ?? idx}
             className={`learn-dot ${idx === currentIndex ? 'active' : ''}`}
-            onClick={() => setCurrentIndex(idx)}
+            onClick={() => goTo(idx)}
+            aria-label={`Go to item ${idx + 1}`}
+            aria-current={idx === currentIndex}
           />
         ))}
       </div>
